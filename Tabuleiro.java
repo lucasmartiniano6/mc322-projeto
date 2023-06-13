@@ -6,7 +6,7 @@ public class Tabuleiro {
             for(int j = 0; j < 8; j++)
                 grid[i][j] = null;
         
-        Rei K1 = new Rei("branco", this);
+        Rei K1 = new Rei("branco", this, "E1");
         this.setPeca(K1.getPosicao(), K1);
  
         K1.moverPeca("E2");

@@ -1,11 +1,12 @@
 public abstract class Peca{
-    private final String corDono;   
+    private final String corDono; // "branco" ou "preto"
     private final Tabuleiro tabuleiro;
     private String posicao; // Ex: "A1", "A8", "H1", "H8"
 
-    public Peca(String corDono, Tabuleiro tabuleiro){
+    public Peca(String corDono, Tabuleiro tabuleiro, String posicao){
         this.corDono = corDono;
         this.tabuleiro = tabuleiro;
+        this.posicao = posicao;
     }
 
     public abstract boolean moverPeca(String destino);
