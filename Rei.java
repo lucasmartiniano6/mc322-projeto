@@ -14,16 +14,12 @@ public class Rei extends Peca{
 
         if(this.getTabuleiro().getPeca(nx, ny) != null){ // Caso a posição não esteja vazia
             if(this.getTabuleiro().getPeca(nx, ny).getCorDono() != this.getCorDono()){ // Peca inimiga
-                this.getTabuleiro().setEmpty(getPosicao());
-                this.getTabuleiro().setPeca(destino, this);
-                return true;
+                return this._make_move(destino);
             }
             else return false;
         }
         else { // Caso a posição esteja vazia
-            this.getTabuleiro().setEmpty(getPosicao());
-            this.getTabuleiro().setPeca(destino, this);
-            return true;
+            return this._make_move(destino);
         }
     }
 

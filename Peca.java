@@ -2,14 +2,25 @@ public abstract class Peca{
     private final String corDono; // "branco" ou "preto"
     private final Tabuleiro tabuleiro;
     private String posicao; // Ex: "A1", "A8", "H1", "H8"
+    private boolean movimentou;
 
     public Peca(String corDono, Tabuleiro tabuleiro, String posicao){
         this.corDono = corDono;
         this.tabuleiro = tabuleiro;
         this.posicao = posicao;
+        this.movimentou = false;
     }
 
     public abstract boolean moverPeca(String destino);
+
+    public boolean _make_move(String destino){
+        // Internamente chamado por moverPeca quando o movimento é válido
+        this.setMovimentou(true);
+        this.getTabuleiro().setEmpty(getPosicao());
+        this.getTabuleiro().setPeca(destino, this);
+        return true;
+    }
+   
 
     public static int getPosX(String pos){
         return Posicao.valueOf(pos.substring(0,1)).valor;
@@ -33,5 +44,13 @@ public abstract class Peca{
 
     public Tabuleiro getTabuleiro() {
         return tabuleiro;
+    }
+
+    public void setMovimentou(boolean movimentou) {
+        this.movimentou = movimentou;
+    }
+
+    public boolean getMovimentou() {
+        return movimentou;
     }
 };
