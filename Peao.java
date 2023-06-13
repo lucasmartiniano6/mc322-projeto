@@ -8,7 +8,7 @@ public class Peao extends Peca{
             return false;
 
         // Aqui, com certeza deltaY = (1 ou 2) e deltaX = (0 ou 1)
-        int nx = getPosX(this.getPosicao());
+        int nx = getPosX(destino);
         int ny = getPosY(destino);
         if(nx < 0 && nx >= 8 && ny < 0 && ny >= 8) // Posição do grid inválida
             return false;

@@ -15,7 +15,7 @@ public class Tabuleiro {
         
         
         // Inicializar as peças brancas
-        brancas.put("P1", new Peao("branca", this, "A2")); // Pawn 1
+        brancas.put("P1", new Peao("branca", this, "A1")); // Pawn 1
         brancas.put("K", new Rei("branca", this, "E1")); // King
         
         // Inicializar as peças pretas
@@ -29,10 +29,6 @@ public class Tabuleiro {
             this.setPeca(branca.getPosicao(), branca);
             this.setPeca(preta.getPosicao(), preta);
         }
-          
-        // Debugging movimentos
-        brancas.get("K").moverPeca("E2"); // mover o Rei branco para E2 
-        brancas.get("P1").moverPeca("B3"); // mover o Peao 1 branco para B3 
     }
 
     public void setEmpty(String posicao){
@@ -51,4 +47,29 @@ public class Tabuleiro {
     public Peca getPeca(int x, int y){
         return grid[x][y];
     }
+
+    public Peca[][] getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Peca[][] grid) {
+        this.grid = grid;
+    }
+
+    public Map<String, Peca> getBrancas() {
+        return brancas;
+    }
+
+    public void setBrancas(Map<String, Peca> brancas) {
+        this.brancas = brancas;
+    }
+
+    public Map<String, Peca> getPretas() {
+        return pretas;
+    }
+
+    public void setPretas(Map<String, Peca> pretas) {
+        this.pretas = pretas;
+    }
+
 }
