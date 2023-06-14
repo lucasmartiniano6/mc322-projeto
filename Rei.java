@@ -9,7 +9,7 @@ public class Rei extends Peca{
 
         int nx = getPosX(destino);
         int ny = getPosY(destino);
-        if(nx < 0 && nx >= 8 && ny < 0 && ny >= 8) // Posição do grid inválida
+        if(nx < 0 || nx >= 8 || ny < 0 || ny >= 8) // Posição do grid inválida
             return false;
 
         if(this.getTabuleiro().getPeca(nx, ny) != null){ // Caso a posição não esteja vazia

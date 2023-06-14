@@ -22,7 +22,7 @@ public class Main {
         // Debugging movimentos
         tabuleiro.mover("C2", "C4");
         tabuleiro.mover("C7", "C5");
-        tabuleiro.mover("A2", "A3");
+        tabuleiro.mover("E1", "E0");
         printarTabuleiro(tabuleiro);
     }
 }
