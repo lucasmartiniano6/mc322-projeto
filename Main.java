@@ -1,5 +1,3 @@
-import java.util.Map;
-
 public class Main {
     public static void printarTabuleiro(Tabuleiro tabuleiro){
         System.out.println("**************************");
@@ -18,14 +16,12 @@ public class Main {
     
     public static void main(String[] args){
         Tabuleiro tabuleiro = new Tabuleiro();
-        Map<String, Peca> brancas = tabuleiro.getBrancas(); //pecas brancas
-        Map<String, Peca> pretas = tabuleiro.getPretas(); //pecas pretas
- 
+
         printarTabuleiro(tabuleiro); // Debugging do tabuleiro
 
         // Debugging movimentos
-        brancas.get("K").moverPeca("D1"); // tentar mover o Rei branco para E2 
-        brancas.get("P4").moverPeca("D4"); // tentar mover o Peão branco para D4
+        tabuleiro.mover("C2", "C4");
+        tabuleiro.mover("C7", "C5");
         printarTabuleiro(tabuleiro);
     }
 }

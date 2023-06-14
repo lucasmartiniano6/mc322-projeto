@@ -6,7 +6,6 @@ public class Tabuleiro {
     private Map<String, Peca> brancas = new HashMap<String, Peca>();
     private Map<String, Peca> pretas = new HashMap<String, Peca>();
 
-
     public Tabuleiro(){
         // Inicializar o grid vazio
         for(int i = 0; i < 8; i++)
@@ -15,14 +14,14 @@ public class Tabuleiro {
         
         
         // Inicializar as peças brancas
-        for(int i=0; i<8; i++) // Pawns
+        brancas.put("K", new Rei("branca", this, "E1")); // Rei
+        for(int i=0; i<8; i++) // Peões
             brancas.put("P" + (i+1), new Peao("branca", this, Posicao.values()[i].toString() + "2"));
-        brancas.put("K", new Rei("branca", this, "E1")); // King
         
         // Inicializar as peças pretas
-        for(int i=0; i<8; i++) // Pawns
+        pretas.put("K", new Rei("preta", this, "E8")); // Rei
+        for(int i=0; i<8; i++) // Peões
             pretas.put("P" + (i+1), new Peao("preta", this, Posicao.values()[i].toString() + "7"));
-        pretas.put("K", new Rei("preta", this, "E8")); // King
 
         // Colocar as peças brancas e pretas no tabuleiro
         try{
@@ -39,6 +38,13 @@ public class Tabuleiro {
         }
     }
 
+    public boolean mover(String origem, String destino){
+        // Movimenta a peça da origem para o destino
+        Peca peca = this.getPeca(origem);
+        if(peca == null) return false;
+        return peca.moverPeca(destino);
+    }
+
     public void setEmpty(String posicao){
         int x = Peca.getPosX(posicao);
         int y = Peca.getPosY(posicao);
@@ -50,6 +56,12 @@ public class Tabuleiro {
         int y = Peca.getPosY(posicao);
         this.grid[x][y] = peca;
         peca.setPosicao(posicao);
+    }
+
+    public Peca getPeca(String posicao){
+        int x = Peca.getPosX(posicao);
+        int y = Peca.getPosY(posicao);
+        return grid[x][y];
     }
 
     public Peca getPeca(int x, int y){
