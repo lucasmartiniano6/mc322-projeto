@@ -22,7 +22,9 @@ public class Main {
         // Debugging movimentos
         tabuleiro.mover("C2", "C4");
         tabuleiro.mover("C7", "C5");
-        tabuleiro.mover("E1", "E0");
+        printarTabuleiro(tabuleiro);
+
+        tabuleiro.setBoardFromFEN("fen/basic.fen");
         printarTabuleiro(tabuleiro);
     }
 }
