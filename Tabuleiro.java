@@ -40,7 +40,9 @@ public class Tabuleiro {
     public boolean setBoardFromFEN(String filename){
         // Lê um arquivo FEN e coloca as peças no tabuleiro de acordo
         FEN fen = new FEN();
-        return fen._setBoard(filename, this);
+        String data = fen.load(filename);
+        if(data == null) return false;
+        return fen._setBoard(data, this);
     }
 
     public boolean mover(String origem, String destino){

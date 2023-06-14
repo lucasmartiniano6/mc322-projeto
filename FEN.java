@@ -2,11 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class FEN {
+public class FEN implements Data{
     // Forsyth–Edwards Notation
     // https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
 
-    public static String load(String filename){
+    public String load(String filename){
         try {
             File file = new File(filename);
             Scanner scanner = new Scanner(file);
@@ -22,11 +22,8 @@ public class FEN {
         }
     }
 
-    public boolean _setBoard(String filename, Tabuleiro tabuleiro){
+    public boolean _setBoard(String data, Tabuleiro tabuleiro){
         // Internamente chamado por setBoardFromFEN para colocar as peças no tabuleiro
-        String data = FEN.load(filename);
-        if(data == null) return false;
-        
         for(int i=0; i<8; i++)
             for(int j=0; j<8; j++)
                 tabuleiro.getGrid()[i][j] = null;
@@ -75,7 +72,7 @@ public class FEN {
         return true;
     }
 
-    public static boolean save(String filename, String data){
+    public boolean save(String filename, String data){
         return false;
     }
 }
