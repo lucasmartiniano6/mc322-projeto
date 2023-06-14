@@ -1,7 +1,10 @@
+import java.util.Map;
+
 public class Main {
     public static void printarTabuleiro(Tabuleiro tabuleiro){
-        System.out.println("*******************");
-        for(int j = 0; j < 8; j++){
+        System.out.println("**************************");
+        for(int j = 7; j >= 0; j--){
+            System.out.print(j+1 + " ");
             for(int i = 0; i < 8; i++){
                 Peca peca = tabuleiro.getPeca(i, j);
                 if(peca == null) System.out.print(" . ");
@@ -9,20 +12,20 @@ public class Main {
             }
             System.out.println();
         }
-        System.out.println("*******************");
+        System.out.println("   A  B  C  D  E  F  G  H");
+        System.out.println("**************************");
     }
     
     public static void main(String[] args){
         Tabuleiro tabuleiro = new Tabuleiro();
-
-        // Debugging do tabuleiro
-        printarTabuleiro(tabuleiro);
+        Map<String, Peca> brancas = tabuleiro.getBrancas(); //pecas brancas
+        Map<String, Peca> pretas = tabuleiro.getPretas(); //pecas pretas
+ 
+        printarTabuleiro(tabuleiro); // Debugging do tabuleiro
 
         // Debugging movimentos
-        tabuleiro.getBrancas().get("K").moverPeca("E2"); // tentar mover o Rei branco para E2 
+        brancas.get("K").moverPeca("D1"); // tentar mover o Rei branco para E2 
+        brancas.get("P4").moverPeca("D4"); // tentar mover o Peão branco para D4
         printarTabuleiro(tabuleiro);
-        tabuleiro.getBrancas().get("P1").moverPeca("B3"); // tentar mover o Peao 1 branco para B3 
-        printarTabuleiro(tabuleiro);
- 
     }
 }

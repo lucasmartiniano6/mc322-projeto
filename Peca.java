@@ -1,5 +1,5 @@
 public abstract class Peca{
-    private final String corDono; // "branco" ou "preto"
+    private final String corDono; // "branca" ou "preta"
     private final Tabuleiro tabuleiro;
     private String posicao; // Ex: "A1", "A8", "H1", "H8"
     private boolean movimentou;
@@ -9,6 +9,8 @@ public abstract class Peca{
         this.tabuleiro = tabuleiro;
         this.posicao = posicao;
         this.movimentou = false;
+        if(corDono != "branca" && corDono != "preta")
+            throw new IllegalArgumentException("Cor inválida");
     }
 
     public abstract boolean moverPeca(String destino);

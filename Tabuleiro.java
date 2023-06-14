@@ -15,19 +15,27 @@ public class Tabuleiro {
         
         
         // Inicializar as peças brancas
-        brancas.put("P1", new Peao("branca", this, "A1")); // Pawn 1
+        for(int i=0; i<8; i++) // Pawns
+            brancas.put("P" + (i+1), new Peao("branca", this, Posicao.values()[i].toString() + "2"));
         brancas.put("K", new Rei("branca", this, "E1")); // King
         
         // Inicializar as peças pretas
-        pretas.put("P1", new Peao("preta", this, "A7"));
-        pretas.put("K", new Rei("preta", this, "E8"));
+        for(int i=0; i<8; i++) // Pawns
+            pretas.put("P" + (i+1), new Peao("preta", this, Posicao.values()[i].toString() + "7"));
+        pretas.put("K", new Rei("preta", this, "E8")); // King
 
         // Colocar as peças brancas e pretas no tabuleiro
-        for(String key : brancas.keySet()){
-            Peca branca = brancas.get(key);
-            Peca preta = pretas.get(key);
-            this.setPeca(branca.getPosicao(), branca);
-            this.setPeca(preta.getPosicao(), preta);
+        try{
+            for(String key : brancas.keySet()){
+                Peca branca = brancas.get(key);
+                this.setPeca(branca.getPosicao(), branca);
+
+                Peca preta = pretas.get(key);
+                this.setPeca(preta.getPosicao(), preta);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Brancas e pretas devem ter o mesmo tamanho: " + e);
+            throw new NullPointerException();
         }
     }
 

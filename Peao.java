@@ -2,7 +2,12 @@ public class Peao extends Peca{
     public boolean moverPeca(String destino){
         // Implementação do movimento do Peão
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
-        int deltaY = getPosY(destino) - getPosY(this.getPosicao()); // deltaY > 0 se o peão está indo para frente
+        int deltaY = Math.abs(getPosY(destino) - getPosY(this.getPosicao())); // deltaY > 0 se o peão está indo para frente
+
+        if(this.getCorDono() == "branca" && getPosY(destino) <= getPosY(this.getPosicao())) // Peão branco não pode ir para trás
+            return false;
+        if(this.getCorDono() == "preta" && getPosY(destino) >= getPosY(this.getPosicao())) // Peão preto não pode ir para trás
+            return false;
 
         if(deltaX > 1 || (deltaY != 1 && deltaY != 2)) // Fora do alcance do Peão
             return false;
