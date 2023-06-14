@@ -25,5 +25,9 @@ public class Rei extends Peca{
 
     public Rei(String corDono, Tabuleiro tabuleiro, String posicao){
         super(corDono, tabuleiro, posicao);
+        if(corDono.equals("branca"))
+            this.setLabel("K");
+        else
+            this.setLabel("k");
     }
 }

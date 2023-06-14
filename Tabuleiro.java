@@ -40,9 +40,13 @@ public class Tabuleiro {
 
     public boolean mover(String origem, String destino){
         // Movimenta a peça da origem para o destino
-        Peca peca = this.getPeca(origem);
-        if(peca == null) return false;
-        return peca.moverPeca(destino);
+        try {
+            Peca peca = this.getPeca(origem);
+            return peca.moverPeca(destino);
+        } catch (NullPointerException e) {
+            System.out.println("Erro ao mover peça: " + e);
+            return false;
+        }
     }
 
     public void setEmpty(String posicao){

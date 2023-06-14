@@ -3,6 +3,7 @@ public abstract class Peca{
     private final Tabuleiro tabuleiro;
     private String posicao; // Ex: "A1", "A8", "H1", "H8"
     private boolean movimentou;
+    private String label; // Ex: "P", "B", "R", "Q", "K" (notação FEN)
 
     public Peca(String corDono, Tabuleiro tabuleiro, String posicao){
         this.corDono = corDono;
@@ -54,5 +55,13 @@ public abstract class Peca{
 
     public boolean getMovimentou() {
         return movimentou;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label){
+        this.label = label;
     }
 };

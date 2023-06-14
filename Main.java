@@ -6,7 +6,7 @@ public class Main {
             for(int i = 0; i < 8; i++){
                 Peca peca = tabuleiro.getPeca(i, j);
                 if(peca == null) System.out.print(" . ");
-                else System.out.print(peca.getCorDono().substring(0,1) + peca.getClass().getSimpleName().substring(0,1) + " ");
+                else System.out.print(" " + peca.getLabel() + " ");
             }
             System.out.println();
         }
@@ -22,6 +22,7 @@ public class Main {
         // Debugging movimentos
         tabuleiro.mover("C2", "C4");
         tabuleiro.mover("C7", "C5");
+        tabuleiro.mover("A2", "A3");
         printarTabuleiro(tabuleiro);
     }
 }

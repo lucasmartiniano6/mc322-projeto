@@ -44,5 +44,9 @@ public class Peao extends Peca{
     
     public Peao(String corDono, Tabuleiro tabuleiro, String posicao){
         super(corDono, tabuleiro, posicao);
+        if(corDono.equals("branca"))
+            setLabel("P");
+        else
+            setLabel("p");
     }
 }
