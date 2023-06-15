@@ -4,9 +4,9 @@ public class Peao extends Peca{
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
         int deltaY = Math.abs(getPosY(destino) - getPosY(this.getPosicao())); // deltaY > 0 se o peão está indo para frente
 
-        if(this.getCorDono() == "branca" && getPosY(destino) <= getPosY(this.getPosicao())) // Peão branco não pode ir para trás
+        if(this.getCorDono().equals("branca") && getPosY(destino) <= getPosY(this.getPosicao())) // Peão branco não pode ir para trás
             return false;
-        if(this.getCorDono() == "preta" && getPosY(destino) >= getPosY(this.getPosicao())) // Peão preto não pode ir para trás
+        if(this.getCorDono().equals("preta") && getPosY(destino) >= getPosY(this.getPosicao())) // Peão preto não pode ir para trás
             return false;
 
         if(deltaX > 1 || (deltaY != 1 && deltaY != 2)) // Fora do alcance do Peão
@@ -18,9 +18,8 @@ public class Peao extends Peca{
         if(nx < 0 || nx >= 8 || ny < 0 || ny >= 8) // Posição do grid inválida
             return false;
 
-        
         if (deltaY == 2){
-            if(getMovimentou() == true || deltaX != 0) // Já se movimentou ou está tentando se mover para o lado
+            if(getMovimentou() || deltaX != 0) // Já se movimentou ou está tentando se mover para o lado
                 return false;
             if(this.getTabuleiro().getPeca(nx, ny) != null) // Caso a posição não esteja vazia
                 return false;
@@ -29,13 +28,22 @@ public class Peao extends Peca{
         }        
         else if (deltaY == 1){
             if(this.getTabuleiro().getPeca(nx, ny) != null){ // Caso a posição não esteja vazia
-                if(this.getTabuleiro().getPeca(nx, ny).getCorDono() != this.getCorDono()){ // Peca inimiga
-                    if(deltaX == 0) return false;
+                if(!this.getTabuleiro().getPeca(nx, ny).getCorDono().equals(this.getCorDono())){ // Peça inimiga
+                    if(deltaX == 0) 
+                        return false;
                     return this._make_move(destino);
                 }
             }
             else if(deltaX == 0){ // Caso a posição esteja vazia
-                return this._make_move(destino);
+                if(this.getCorDono().equals("branca") && ny == 8) {
+                    // Promoção de um peão das brancas
+                }
+                else if(this.getCorDono().equals("preta") && ny == 1) {
+                    // Promoção de um peão das pretas
+                }
+                else {
+                    return this._make_move(destino);
+                }   
             }
     
         }
