@@ -14,11 +14,15 @@ public class Tabuleiro {
         
         // Inicializar as peças brancas
         brancas.add(new Rei("branca", this, "E1")); // Rei
+        brancas.add(new Cavalo("branca", this, "B1")); // Cavalos
+        brancas.add(new Cavalo("branca", this, "G1")); 
         for(int i=0; i<8; i++) // Peões
             brancas.add(new Peao("branca", this, Posicao.values()[i].toString() + "2"));
         
         // Inicializar as peças pretas
         pretas.add(new Rei("preta", this, "E8")); // Rei
+        pretas.add(new Cavalo("preta", this, "B8")); // Cavalos
+        pretas.add(new Cavalo("preta", this, "G8")); 
         for(int i=0; i<8; i++) // Peões
             pretas.add(new Peao("preta", this, Posicao.values()[i].toString() + "7"));
 

@@ -24,6 +24,10 @@ public class Main {
         tabuleiro.mover("C7", "C5");
         printarTabuleiro(tabuleiro);
 
+        tabuleiro.mover("B1", "C3");
+        tabuleiro.mover("B8", "A6");
+        printarTabuleiro(tabuleiro);
+
         tabuleiro.setBoardFromFEN("fen/basic.fen");
         printarTabuleiro(tabuleiro);
     }
