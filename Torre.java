@@ -1,5 +1,5 @@
 public class Torre extends Peca{
-    public boolean moverPeca(String destino) {
+    public boolean isReachable(String destino) {
         // Implementação do movimento da Torre
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
         int deltaY = Math.abs(getPosY(this.getPosicao()) - getPosY(destino));
@@ -45,13 +45,13 @@ public class Torre extends Peca{
 
         if(this.getTabuleiro().getPeca(nx, ny) != null) { // Caso a posição de destino não esteja vazia
             if(!this.getTabuleiro().getPeca(nx, ny).getCorDono().equals(this.getCorDono())) { // Peça inimiga
-                return this._make_move(destino);
+                return true;
             }
             else
                 return false;
         }
         else { // Caso a posição de destino esteja vazia
-            return this._make_move(destino);
+            return true;
         }
     }
 

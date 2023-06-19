@@ -1,6 +1,5 @@
 public class Cavalo extends Peca {
-    
-    public boolean moverPeca(String destino){
+    public boolean isReachable(String destino){
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
         int deltaY = Math.abs(getPosY(this.getPosicao()) - getPosY(destino));
         
@@ -16,11 +15,11 @@ public class Cavalo extends Peca {
             return false;
        
         if(this.getTabuleiro().getPeca(nx, ny) == null){ // Caso o destino esteja vazio
-            return this._make_move(destino);
+            return true;
 
         } else { // Caso o destino contenha alguma peça
            if(this.getTabuleiro().getPeca(nx, ny).getCorDono() != this.getCorDono())// Verifica se o destino possui uma peca inimiga
-                return this._make_move(destino);
+                return true;
             else 
                 return false;
         }

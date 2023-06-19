@@ -119,4 +119,33 @@ public class Tabuleiro {
     public void setPretas(ArrayList<Peca> pretas) {
         this.pretas = pretas;
     }
+
+    public boolean isChecked(String corDono, String destino){
+        String reiPos = null;
+        if(corDono.equals("branca")) {
+            for(Peca peca : brancas) {
+                if(peca instanceof Rei) {
+                    reiPos = peca.getPosicao();
+                }
+            }
+            for(Peca peca : pretas) {
+                if(peca.isReachable(reiPos)) {
+                    return true;
+                }
+            }
+        }
+        else {
+            for(Peca peca : pretas) {
+                if(peca instanceof Rei) {
+                    reiPos = peca.getPosicao();
+                }
+            }
+            for(Peca peca : brancas) {
+                if(peca.isReachable(reiPos)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
