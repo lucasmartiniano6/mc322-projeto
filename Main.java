@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
     public static void printarTabuleiro(Tabuleiro tabuleiro){
         System.out.println("**************************");
@@ -15,12 +17,19 @@ public class Main {
     }
     
     public static void main(String[] args){
+        Scanner entrada = new Scanner(System.in);
         Tabuleiro tabuleiro = new Tabuleiro();
 
         printarTabuleiro(tabuleiro); // Debugging do tabuleiro
-        tabuleiro.saveBoard("fen/basic.fen");
+        tabuleiro.saveBoard("fen/board.fen");
 
         // Debugging movimentos
         tabuleiro.setBoardFromFEN("fen/board.fen");
+        while(true) {
+           String s1 = entrada.nextLine();
+           String s2 = entrada.nextLine();
+           tabuleiro.mover(s1, s2);
+           printarTabuleiro(tabuleiro);
+        }
     }
 }

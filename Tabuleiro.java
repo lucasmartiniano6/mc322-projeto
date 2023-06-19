@@ -28,7 +28,7 @@ public class Tabuleiro {
         pretas.add(new Cavalo("preta", this, "B8")); // Cavalos
         pretas.add(new Cavalo("preta", this, "G8")); 
         pretas.add(new Torre("preta", this, "A8")); // Torres
-        pretas.add(new Torre("branca", this, "H8"));
+        pretas.add(new Torre("preta", this, "H8"));
         pretas.add(new Bispo("preta", this, "C8")); // Bispos
         pretas.add(new Bispo("preta", this, "F8")); // Bispos
          for(int i=0; i<8; i++) // Peões

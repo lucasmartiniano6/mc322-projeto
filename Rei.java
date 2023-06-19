@@ -6,6 +6,10 @@ public class Rei extends Peca{
 
         int nx = getPosX(destino);
         int ny = getPosY(destino);
+
+        if(deltaX > 0 && deltaY > 0)
+            return false;
+        
         if(nx < 0 || nx >= 8 || ny < 0 || ny >= 8) // Posição do grid inválida
             return false;
 
