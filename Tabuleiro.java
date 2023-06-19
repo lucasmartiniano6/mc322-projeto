@@ -14,6 +14,7 @@ public class Tabuleiro {
         
         // Inicializar as peças brancas
         brancas.add(new Rei("branca", this, "E1")); // Rei
+        brancas.add(new Rainha("branca", this, "D1")); // Rainha
         brancas.add(new Cavalo("branca", this, "B1")); // Cavalos
         brancas.add(new Cavalo("branca", this, "G1")); 
         brancas.add(new Torre("branca", this, "A1")); // Torres
@@ -25,6 +26,7 @@ public class Tabuleiro {
         
         // Inicializar as peças pretas
         pretas.add(new Rei("preta", this, "E8")); // Rei
+        pretas.add(new Rainha("preta", this, "D8"));
         pretas.add(new Cavalo("preta", this, "B8")); // Cavalos
         pretas.add(new Cavalo("preta", this, "G8")); 
         pretas.add(new Torre("preta", this, "A8")); // Torres
