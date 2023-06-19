@@ -32,8 +32,8 @@ public class Cavalo extends Peca {
     public Cavalo(String corDono, Tabuleiro tabuleiro, String posicao){
         super(corDono, tabuleiro, posicao);
         if(corDono.equals("branca")){
-            setLabel("C");
+            setLabel("N");
         }else
-            setLabel("c");
+            setLabel("n");
     }
 }

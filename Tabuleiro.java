@@ -16,6 +16,10 @@ public class Tabuleiro {
         brancas.add(new Rei("branca", this, "E1")); // Rei
         brancas.add(new Cavalo("branca", this, "B1")); // Cavalos
         brancas.add(new Cavalo("branca", this, "G1")); 
+        brancas.add(new Torre("branca", this, "A1")); // Torres
+        brancas.add(new Torre("branca", this, "H1"));
+        brancas.add(new Bispo("branca", this, "C1")); // Bispos
+        brancas.add(new Bispo("branca", this, "F1")); // Bispos
         for(int i=0; i<8; i++) // Peões
             brancas.add(new Peao("branca", this, Posicao.values()[i].toString() + "2"));
         
@@ -23,7 +27,11 @@ public class Tabuleiro {
         pretas.add(new Rei("preta", this, "E8")); // Rei
         pretas.add(new Cavalo("preta", this, "B8")); // Cavalos
         pretas.add(new Cavalo("preta", this, "G8")); 
-        for(int i=0; i<8; i++) // Peões
+        pretas.add(new Torre("preta", this, "A8")); // Torres
+        pretas.add(new Torre("branca", this, "H8"));
+        pretas.add(new Bispo("preta", this, "C8")); // Bispos
+        pretas.add(new Bispo("preta", this, "F8")); // Bispos
+         for(int i=0; i<8; i++) // Peões
             pretas.add(new Peao("preta", this, Posicao.values()[i].toString() + "7"));
 
         // Colocar as peças brancas e pretas no tabuleiro
@@ -47,6 +55,11 @@ public class Tabuleiro {
         String data = fen.load(filename);
         if(data == null) return false;
         return fen._setBoard(data, this);
+    }
+
+    public boolean saveBoard(String filename){
+        FEN fen = new FEN();
+        return fen.save(filename, this);
     }
 
     public boolean mover(String origem, String destino){

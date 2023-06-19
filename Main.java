@@ -18,17 +18,9 @@ public class Main {
         Tabuleiro tabuleiro = new Tabuleiro();
 
         printarTabuleiro(tabuleiro); // Debugging do tabuleiro
+        tabuleiro.saveBoard("fen/basic.fen");
 
         // Debugging movimentos
-        tabuleiro.mover("C2", "C4");
-        tabuleiro.mover("C7", "C5");
-        printarTabuleiro(tabuleiro);
-
-        tabuleiro.mover("B1", "C3");
-        tabuleiro.mover("B8", "A6");
-        printarTabuleiro(tabuleiro);
-
-        tabuleiro.setBoardFromFEN("fen/basic.fen");
-        printarTabuleiro(tabuleiro);
+        tabuleiro.setBoardFromFEN("fen/board.fen");
     }
 }

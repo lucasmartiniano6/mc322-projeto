@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class FEN implements Data{
@@ -72,7 +74,37 @@ public class FEN implements Data{
         return true;
     }
 
-    public boolean save(String filename, String data){
-        return false;
+    public boolean save(String filename, Tabuleiro tabuleiro){
+        String data = "";
+        for(int j=7; j>=0; j--){
+            String[] patterns = new String[8];
+            for(int i=0; i<8; i++){
+                Peca peca = tabuleiro.getPeca(i, j);
+                if(peca == null) patterns[i] = "";
+                else patterns[i] = peca.getLabel();
+            }
+            for(int i=0; i<8; i++){
+                int cnt = 0;
+                while(i< 8 && patterns[i] == ""){
+                    i++;
+                    cnt++;
+                }
+                if(cnt != 0) data += Integer.toString(cnt);
+                if(i >= 8) continue;
+                else data += patterns[i];
+            }
+            if(j>0) data += '/';
+        }
+
+        try {
+            FileWriter writer = new FileWriter(filename);
+            writer.write(data);
+            writer.close();
+            return true;
+         } catch (IOException e) {
+            System.out.println("Erro ao escrever arquivo");
+            return false;
+        }
+
     }
 }
