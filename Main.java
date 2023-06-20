@@ -16,16 +16,16 @@ public class Main {
     
     public static void main(String[] args){
         Tabuleiro tabuleiro = new Tabuleiro();
+        Relogio relogio1 = new Relogio(1, "brancas");
+        relogio1.startRelogio();
+        relogio1.timer.start();
+
 
         printarTabuleiro(tabuleiro); // Debugging do tabuleiro
 
         // Debugging movimentos
         tabuleiro.mover("C2", "C4");
         tabuleiro.mover("C7", "C5");
-        printarTabuleiro(tabuleiro);
-
-        tabuleiro.mover("B1", "C3");
-        tabuleiro.mover("B8", "A6");
         printarTabuleiro(tabuleiro);
 
         tabuleiro.setBoardFromFEN("fen/basic.fen");
