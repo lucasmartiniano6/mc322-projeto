@@ -17,8 +17,11 @@ public class Main {
     }
     
     public static void main(String[] args){
+        
         Scanner entrada = new Scanner(System.in);
         Tabuleiro tabuleiro = new Tabuleiro();
+
+        // teste relogio
         Relogio relogio1 = new Relogio(1, "brancas");
         relogio1.startRelogio();
         relogio1.timer.start();
@@ -28,14 +31,6 @@ public class Main {
         tabuleiro.saveBoard("fen/board.fen");
 
         // Debugging movimentos
-<<<<<<< HEAD
-        tabuleiro.mover("C2", "C4");
-        tabuleiro.mover("C7", "C5");
-        printarTabuleiro(tabuleiro);
-
-        tabuleiro.setBoardFromFEN("fen/basic.fen");
-        printarTabuleiro(tabuleiro);
-=======
         tabuleiro.setBoardFromFEN("fen/board.fen");
         while(true) {
            String s1 = entrada.nextLine();
@@ -43,6 +38,5 @@ public class Main {
            tabuleiro.mover(s1, s2);
            printarTabuleiro(tabuleiro);
         }
->>>>>>> 4672f745225d34bf5e84e0fa213e1188bf930e3f
     }
 }

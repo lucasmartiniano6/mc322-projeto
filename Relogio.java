@@ -10,7 +10,7 @@ public class Relogio {
     int segundos;
     Timer timer;
 
-
+    // constructor
     // tempo dado indica os minutos
     public Relogio(int tempo, String corDono){
         this.segundos = 0;
@@ -18,11 +18,11 @@ public class Relogio {
         setWindowRelogio();  
     }
 
-
+    // cria uma janela para o relogio
     public void setWindowRelogio(){
         this.window = new JFrame();
         window.setSize(100, 100);
-        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         label = new JLabel();
         label= new JLabel(minutos + ":" + segundos);
         label.setHorizontalAlignment(JLabel.CENTER);
