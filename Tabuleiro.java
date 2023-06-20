@@ -14,16 +14,26 @@ public class Tabuleiro {
         
         // Inicializar as peças brancas
         brancas.add(new Rei("branca", this, "E1")); // Rei
+        brancas.add(new Rainha("branca", this, "D1")); // Rainha
         brancas.add(new Cavalo("branca", this, "B1")); // Cavalos
         brancas.add(new Cavalo("branca", this, "G1")); 
+        brancas.add(new Torre("branca", this, "A1")); // Torres
+        brancas.add(new Torre("branca", this, "H1"));
+        brancas.add(new Bispo("branca", this, "C1")); // Bispos
+        brancas.add(new Bispo("branca", this, "F1")); // Bispos
         for(int i=0; i<8; i++) // Peões
             brancas.add(new Peao("branca", this, Posicao.values()[i].toString() + "2"));
         
         // Inicializar as peças pretas
         pretas.add(new Rei("preta", this, "E8")); // Rei
+        pretas.add(new Rainha("preta", this, "D8"));
         pretas.add(new Cavalo("preta", this, "B8")); // Cavalos
         pretas.add(new Cavalo("preta", this, "G8")); 
-        for(int i=0; i<8; i++) // Peões
+        pretas.add(new Torre("preta", this, "A8")); // Torres
+        pretas.add(new Torre("preta", this, "H8"));
+        pretas.add(new Bispo("preta", this, "C8")); // Bispos
+        pretas.add(new Bispo("preta", this, "F8")); // Bispos
+         for(int i=0; i<8; i++) // Peões
             pretas.add(new Peao("preta", this, Posicao.values()[i].toString() + "7"));
 
         // Colocar as peças brancas e pretas no tabuleiro
@@ -47,6 +57,11 @@ public class Tabuleiro {
         String data = fen.load(filename);
         if(data == null) return false;
         return fen._setBoard(data, this);
+    }
+
+    public boolean saveBoard(String filename){
+        FEN fen = new FEN();
+        return fen.save(filename, this);
     }
 
     public boolean mover(String origem, String destino){
@@ -105,5 +120,34 @@ public class Tabuleiro {
 
     public void setPretas(ArrayList<Peca> pretas) {
         this.pretas = pretas;
+    }
+
+    public boolean isChecked(String corDono, String destino){
+        String reiPos = null;
+        if(corDono.equals("branca")) {
+            for(Peca peca : brancas) {
+                if(peca instanceof Rei) {
+                    reiPos = peca.getPosicao();
+                }
+            }
+            for(Peca peca : pretas) {
+                if(peca.isReachable(reiPos)) {
+                    return true;
+                }
+            }
+        }
+        else {
+            for(Peca peca : pretas) {
+                if(peca instanceof Rei) {
+                    reiPos = peca.getPosicao();
+                }
+            }
+            for(Peca peca : brancas) {
+                if(peca.isReachable(reiPos)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -1,5 +1,5 @@
 public class Peao extends Peca{
-    public boolean moverPeca(String destino){
+    public boolean isReachable(String destino){
         // Implementação do movimento do Peão
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
         int deltaY = Math.abs(getPosY(destino) - getPosY(this.getPosicao())); // deltaY > 0 se o peão está indo para frente
@@ -19,19 +19,19 @@ public class Peao extends Peca{
             return false;
 
         if (deltaY == 2){
-            if(getMovimentou() || deltaX != 0) // Já se movimentou ou está tentando se mover para o lado
+            if(this.getMovimentos() > 0 || deltaX != 0) // Já se movimentou ou está tentando se mover para o lado
                 return false;
             if(this.getTabuleiro().getPeca(nx, ny) != null) // Caso a posição não esteja vazia
                 return false;
             
-            return this._make_move(destino);
+            return true;
         }        
         else if (deltaY == 1){
             if(this.getTabuleiro().getPeca(nx, ny) != null){ // Caso a posição não esteja vazia
                 if(!this.getTabuleiro().getPeca(nx, ny).getCorDono().equals(this.getCorDono())){ // Peça inimiga
                     if(deltaX == 0) 
                         return false;
-                    return this._make_move(destino);
+                    return true;
                 }
             }
             else if(deltaX == 0){ // Caso a posição esteja vazia
@@ -42,7 +42,7 @@ public class Peao extends Peca{
                     // Promoção de um peão das pretas
                 }
                 else {
-                    return this._make_move(destino);
+                    return true;
                 }   
             }
     
