@@ -27,7 +27,7 @@ public class Tabuleiro {
         
         // Inicializar as peças pretas
         pretas.add(new Rei("preta", this, "E8")); // Rei
-        pretas.add(new Rainha("preta", this, "D8"));
+        pretas.add(new Rainha("preta", this, "D8")); // Rainha
         pretas.add(new Cavalo("preta", this, "B8")); // Cavalos
         pretas.add(new Cavalo("preta", this, "G8")); 
         pretas.add(new Torre("preta", this, "A8")); // Torres
@@ -99,6 +99,12 @@ public class Tabuleiro {
     public void setPeca(String posicao, Peca peca){
         int x = Peca.getPosX(posicao);
         int y = Peca.getPosY(posicao);
+        if(this.grid[x][y] != null){
+            if(this.grid[x][y].getCorDono().equals("branca"))
+                brancas.remove(this.grid[x][y]);
+            else
+                pretas.remove(this.grid[x][y]);
+        }
         this.grid[x][y] = peca;
         peca.setPosicao(posicao);
     }
@@ -128,6 +134,12 @@ public class Tabuleiro {
     public void setBrancas(ArrayList<Peca> brancas) {
         this.brancas = brancas;
     }
+    public void addBrancas(Peca peca){
+        for(Peca p: brancas)
+            if(p.equals(peca))
+                return;
+        this.brancas.add(peca);
+    }
 
     public ArrayList<Peca> getPretas() {
         return pretas;
@@ -136,8 +148,14 @@ public class Tabuleiro {
     public void setPretas(ArrayList<Peca> pretas) {
         this.pretas = pretas;
     }
+    public void addPretas(Peca peca){
+        for(Peca p: brancas)
+        if(p.equals(peca))
+            return;
+        this.pretas.add(peca);
+    }
 
-    public boolean isChecked(String corDono, String destino){
+    public boolean isChecked(String corDono){
         String reiPos = null;
         if(corDono.equals("branca")) {
             for(Peca peca : brancas) {
@@ -166,8 +184,24 @@ public class Tabuleiro {
         return false;
     }
 
+    public boolean noMoves(String corDono){
+        ArrayList<Peca> pecas = corDono.equals("branca") ? getBrancas() : getPretas(); 
+        for(Peca peca: pecas){
+            String lastPos = peca.getPosicao();
+            for(Posicao letra: Posicao.values()){
+                for(int num = 1; num <= 8; num++){
+                    String posicao = letra.name() + Integer.toString(num);
+                    if(peca.legalMove(posicao)) { // existe ao menos 1 movimento que salva a partida
+                        peca._undo_move(lastPos, posicao);
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public void repetitionEnd() {
         System.out.println("O jogo acabou por empate por repetição");
     }
-
 }
