@@ -96,6 +96,10 @@ public class Tabuleiro {
         int y = Peca.getPosY(posicao);
         grid[x][y] = null;
     }
+
+    public ArrayList<Peca> getPecasComidas() {
+        return pecasComidas;
+    }
     
     public boolean setPeca(String posicao, Peca peca){
         // true se houve captura, false cc
@@ -193,12 +197,10 @@ public class Tabuleiro {
     public boolean noMoves(String corDono){
         ArrayList<Peca> pecas = corDono.equals("branca") ? getBrancas() : getPretas(); 
         for(Peca peca: pecas){
-            String lastPos = peca.getPosicao();
             for(Posicao letra: Posicao.values()){
                 for(int num = 1; num <= 8; num++){
                     String posicao = letra.name() + Integer.toString(num);
                     if(peca.legalMove(posicao)) { // existe ao menos 1 movimento que salva a partida
-                        peca._undo_move(lastPos, posicao);
                         return false;
                     }
                 }

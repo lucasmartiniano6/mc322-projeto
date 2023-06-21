@@ -58,6 +58,7 @@ public abstract class Peca{
         if(this.isReachable(destino)) {
            comeu = _make_move(destino);
             if(!this.getTabuleiro().isChecked(this.getCorDono())) {
+                this._undo_move(lastPos, destino, comeu);
                 return true;
             }
             this._undo_move(lastPos, destino, comeu);
@@ -80,14 +81,19 @@ public abstract class Peca{
         // Internamente chamado por moverPeca quando o movimento é inválido
         // Coloca a peça em lastPos
         this.setMovimentos(--movimentos);
-        this.getTabuleiro().setEmpty(destino);
-        this.getTabuleiro().setPeca(lastPos, this);
-        if(getCorDono().equals("branca")){
-            getTabuleiro().addBrancas(this);
+        if(comeu) {
+            Peca pecaRemov = tabuleiro.getPecasComidas().get(tabuleiro.getPecasComidas().size()-1);
+            if(pecaRemov.getCorDono().equals("branca")) {
+                tabuleiro.addBrancas(pecaRemov);
+            } else  if(pecaRemov.getCorDono().equals("preta")) {
+                tabuleiro.addPretas(pecaRemov);
+            }
+            getTabuleiro().setPeca(destino, pecaRemov);
+            tabuleiro.getPecasComidas().remove(pecaRemov);
+        } else {
+            getTabuleiro().setEmpty(destino);
         }
-        else{
-            getTabuleiro().addPretas(this);
-        }
+        getTabuleiro().setPeca(lastPos, this);
     }
 
     public static int getPosX(String pos){
