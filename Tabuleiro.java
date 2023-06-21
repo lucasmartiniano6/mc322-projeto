@@ -71,7 +71,7 @@ public class Tabuleiro {
             if(par.getFen().equals(fen)) {
                 par.increaseTimes();
                 if(par.getTimes() == 3) {
-                    repetitionEnd();
+                    endGame("repetição"); //jogo acabou empatado (por repetição)
                 }
                 return;
             }
@@ -212,7 +212,15 @@ public class Tabuleiro {
         return true;
     }
 
-    public void repetitionEnd() {
-        System.out.println("O jogo acabou por empate por repetição");
+    public void endGame(String motivo, String corGanhador) {
+        System.out.println(corGanhador + "s vencem!");
+        System.out.println("Motivo: " + motivo);
+        System.exit(0);
+    }
+
+    public void endGame(String motivo) {
+        System.out.println("Empate!");
+        System.out.println("Motivo: " + motivo);
+        System.exit(0);
     }
 }

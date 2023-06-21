@@ -30,14 +30,14 @@ public abstract class Peca{
                 //  -> se é mate --> END GAME (afogamento)
                 if(this.getTabuleiro().isChecked(corAdversario)) {
                     if(this.getTabuleiro().noMoves(corAdversario)) {
-                        System.out.println("Xeque-mate. " + corDono + "s vencem!");
-                        System.exit(0); //end game
+                        // END GAME (checkmate)
+                        this.getTabuleiro().endGame("xeque-mate", corDono);
                     }
                 }
                 else {
                     if(this.getTabuleiro().noMoves(corAdversario)) {
-                        System.out.println("Afogamento. Partida empatada!");
-                        System.exit(0); //end game
+                        // END GAME (afogamento)
+                        this.getTabuleiro().endGame("afogamento"); 
                     }
                 }
                 return true;
