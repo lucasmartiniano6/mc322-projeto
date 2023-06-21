@@ -81,8 +81,8 @@ public class Tabuleiro {
 
     public boolean mover(String origem, String destino){
         // Movimenta a peça da origem para o destino
+        Peca peca = this.getPeca(origem);
         try {
-            Peca peca = this.getPeca(origem);
             adicionarTabuleiro(FEN.generateFen(this));
             return peca.moverPeca(destino);
         } catch (NullPointerException e) {
@@ -196,7 +196,8 @@ public class Tabuleiro {
 
     public boolean noMoves(String corDono){
         ArrayList<Peca> pecas = corDono.equals("branca") ? getBrancas() : getPretas(); 
-        for(Peca peca: pecas){
+        ArrayList<Peca> pecasCopy = new ArrayList<Peca>(pecas);
+        for(Peca peca: pecasCopy){
             for(Posicao letra: Posicao.values()){
                 for(int num = 1; num <= 8; num++){
                     String posicao = letra.name() + Integer.toString(num);

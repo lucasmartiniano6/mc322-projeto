@@ -85,7 +85,7 @@ public abstract class Peca{
             Peca pecaRemov = tabuleiro.getPecasComidas().get(tabuleiro.getPecasComidas().size()-1);
             if(pecaRemov.getCorDono().equals("branca")) {
                 tabuleiro.addBrancas(pecaRemov);
-            } else  if(pecaRemov.getCorDono().equals("preta")) {
+            } else if(pecaRemov.getCorDono().equals("preta")) {
                 tabuleiro.addPretas(pecaRemov);
             }
             getTabuleiro().setPeca(destino, pecaRemov);
