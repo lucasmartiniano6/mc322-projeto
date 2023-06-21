@@ -36,6 +36,7 @@ public class Main {
            String s1 = entrada.nextLine();
            String s2 = entrada.nextLine();
            tabuleiro.mover(s1, s2);
+           
            printarTabuleiro(tabuleiro);
         }
     }

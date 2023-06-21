@@ -74,7 +74,7 @@ public class FEN implements Data{
         return true;
     }
 
-    public boolean save(String filename, Tabuleiro tabuleiro){
+    public static String generateFen(Tabuleiro tabuleiro) {
         String data = "";
         for(int j=7; j>=0; j--){
             String[] patterns = new String[8];
@@ -95,6 +95,11 @@ public class FEN implements Data{
             }
             if(j>0) data += '/';
         }
+        return data;
+    }
+
+    public boolean save(String filename, Tabuleiro tabuleiro){
+        String data = generateFen(tabuleiro);
 
         try {
             FileWriter writer = new FileWriter(filename);

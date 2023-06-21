@@ -4,6 +4,7 @@ public class Tabuleiro {
     private Peca[][] grid = new Peca[8][8];
     private ArrayList<Peca> brancas = new ArrayList<>();
     private ArrayList<Peca> pretas = new ArrayList<>();
+    private ArrayList<Pair> listaFensJogo = new ArrayList<>();
 
     public Tabuleiro(){
         // Inicializar o grid vazio
@@ -64,10 +65,24 @@ public class Tabuleiro {
         return fen.save(filename, this);
     }
 
+    private void adicionarTabuleiro(String fen) {
+        for(Pair par : listaFensJogo) {
+            if(par.getFen().equals(fen)) {
+                par.increaseTimes();
+                if(par.getTimes() == 3) {
+                    repetitionEnd();
+                }
+                return;
+            }
+        }
+        listaFensJogo.add(new Pair(fen));
+    }
+
     public boolean mover(String origem, String destino){
         // Movimenta a peça da origem para o destino
         try {
             Peca peca = this.getPeca(origem);
+            adicionarTabuleiro(FEN.generateFen(this));
             return peca.moverPeca(destino);
         } catch (NullPointerException e) {
             System.out.println("Erro ao mover peça: " + e);
@@ -150,4 +165,9 @@ public class Tabuleiro {
         }
         return false;
     }
+
+    public void repetitionEnd() {
+        System.out.println("O jogo acabou por empate por repetição");
+    }
+
 }
