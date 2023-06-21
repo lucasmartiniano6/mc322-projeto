@@ -101,11 +101,13 @@ public class Tabuleiro {
         return pecasComidas;
     }
     
+    //AQUI
     public boolean setPeca(String posicao, Peca peca){
         // true se houve captura, false cc
         boolean returnFlag = false;
         int x = Peca.getPosX(posicao);
         int y = Peca.getPosY(posicao);
+        setEmpty(peca.getPosicao());
         if(this.grid[x][y] != null){
             if(this.grid[x][y].getCorDono().equals("branca"))
                 brancas.remove(this.grid[x][y]);

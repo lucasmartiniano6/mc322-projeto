@@ -61,7 +61,7 @@ public abstract class Peca{
                 this._undo_move(lastPos, destino, comeu);
                 return true;
             }
-            this._undo_move(lastPos, destino, comeu);
+            this._undo_move(lastPos, destino, comeu); 
         }
         return false;
     }
@@ -76,7 +76,7 @@ public abstract class Peca{
         return(getTabuleiro().setPeca(destino, this));
     }
 
-    //aqui
+    
     public void _undo_move(String lastPos, String destino, boolean comeu){
         // Internamente chamado por moverPeca quando o movimento é inválido
         // Coloca a peça em lastPos
@@ -88,16 +88,23 @@ public abstract class Peca{
             } else if(pecaRemov.getCorDono().equals("preta")) {
                 tabuleiro.addPretas(pecaRemov);
             }
+            getTabuleiro().setPeca(lastPos, this);
             getTabuleiro().setPeca(destino, pecaRemov);
             tabuleiro.getPecasComidas().remove(pecaRemov);
         } else {
             getTabuleiro().setEmpty(destino);
+            getTabuleiro().setPeca(lastPos, this);
         }
-        getTabuleiro().setPeca(lastPos, this);
     }
 
     public static int getPosX(String pos){
-        return Posicao.valueOf(pos.substring(0,1)).valor;
+        try{
+            return Posicao.valueOf(pos.substring(0,1)).valor;
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+        return 0;
     }
     
     public static int getPosY(String pos){
