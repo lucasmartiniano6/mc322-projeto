@@ -53,19 +53,16 @@ public class Tabuleiro {
     }
 
     public boolean setBoardFromFEN(String filename){
-        // Lê um arquivo FEN e coloca as peças no tabuleiro de acordo
-        FEN fen = new FEN();
-        String data = fen.load(filename);
+        String data = FEN.load(filename);
         if(data == null) return false;
-        return fen._setBoard(data, this);
+        return FEN._setBoard(data, this);
     }
 
     public boolean saveBoard(String filename){
-        FEN fen = new FEN();
-        return fen.save(filename, this);
+        return FEN.save(filename, this);
     }
 
-    private void adicionarTabuleiro(String fen) {
+    public void adicionarTabuleiro(String fen) {
         for(Pair par : listaFensJogo) {
             if(par.getFen().equals(fen)) {
                 par.increaseTimes();
@@ -82,7 +79,6 @@ public class Tabuleiro {
         // Movimenta a peça da origem para o destino
         try {
             Peca peca = this.getPeca(origem);
-            adicionarTabuleiro(FEN.generateFen(this));
             return peca.moverPeca(destino);
         } catch (NullPointerException e) {
             System.out.println("Erro ao mover peça: " + e);
@@ -125,6 +121,10 @@ public class Tabuleiro {
 
     public void setGrid(Peca[][] grid) {
         this.grid = grid;
+    }
+
+    public ArrayList<Pair> getListaFensJogo() {
+        return listaFensJogo;
     }
 
     public ArrayList<Peca> getBrancas() {
@@ -187,12 +187,11 @@ public class Tabuleiro {
     public boolean noMoves(String corDono){
         ArrayList<Peca> pecas = corDono.equals("branca") ? getBrancas() : getPretas(); 
         for(Peca peca: pecas){
-            String lastPos = peca.getPosicao();
             for(Posicao letra: Posicao.values()){
                 for(int num = 1; num <= 8; num++){
                     String posicao = letra.name() + Integer.toString(num);
                     if(peca.legalMove(posicao)) { // existe ao menos 1 movimento que salva a partida
-                        peca._undo_move(lastPos, posicao);
+                        peca._undo_move();
                         return false;
                     }
                 }

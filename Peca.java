@@ -10,12 +10,11 @@ public abstract class Peca{
         this.tabuleiro = tabuleiro;
         this.posicao = posicao;
         this.movimentos = 0;
-        if(corDono != "branca" && corDono != "preta")
+        if(!corDono.equals("branca") && !corDono.equals("preta"))
             throw new IllegalArgumentException("Cor inválida");
     }
 
     public boolean moverPeca(String destino) {
-        String lastPos = this.getPosicao();
         String corDono = this.getCorDono();
         String corAdversario = corDono.equals("branca") ? "preta" : "branca";
         if(this.isReachable(destino)) {
@@ -44,7 +43,7 @@ public abstract class Peca{
             else{
                 // movimento inválido
                 // deixa o jogador atual checked
-                this._undo_move(lastPos, destino);
+                this._undo_move();
                 return false;
             }
         }
@@ -52,13 +51,12 @@ public abstract class Peca{
     }
 
     public boolean legalMove(String destino) {
-        String lastPos = this.getPosicao();
         if(this.isReachable(destino)) {
             this._make_move(destino);
             if(!this.getTabuleiro().isChecked(this.getCorDono())) {
                 return true;
             }
-            this._undo_move(lastPos, destino);
+            this._undo_move();
         }
         return false;
     }
@@ -71,20 +69,15 @@ public abstract class Peca{
         this.setMovimentos(++movimentos);
         this.getTabuleiro().setEmpty(getPosicao());
         this.getTabuleiro().setPeca(destino, this);
+        tabuleiro.adicionarTabuleiro(FEN.generateFen(tabuleiro));
     }
 
-    public void _undo_move(String lastPos, String destino){
+    public void _undo_move(){
         // Internamente chamado por moverPeca quando o movimento é inválido
         // Coloca a peça em lastPos
         this.setMovimentos(--movimentos);
-        this.getTabuleiro().setEmpty(destino);
-        this.getTabuleiro().setPeca(lastPos, this);
-        if(getCorDono().equals("branca")){
-            getTabuleiro().addBrancas(this);
-        }
-        else{
-            getTabuleiro().addPretas(this);
-        }
+        FEN._setBoard((tabuleiro.getListaFensJogo().get(tabuleiro.getListaFensJogo().size() - 2)).getFen(), tabuleiro);
+        tabuleiro.getListaFensJogo().remove(tabuleiro.getListaFensJogo().size() -1);
     }
 
     public static int getPosX(String pos){
