@@ -17,9 +17,10 @@ public abstract class Peca{
     public boolean moverPeca(String destino) {
         String lastPos = this.getPosicao();
         String corDono = this.getCorDono();
+        boolean comeu = false;
         String corAdversario = corDono.equals("branca") ? "preta" : "branca";
         if(this.isReachable(destino)) {
-            this._make_move(destino);
+            comeu = _make_move(destino);
             if(!this.getTabuleiro().isChecked(corDono)) {
                 // movimento válido do jogador atual (não me deixa checked)
                 // se é checked (cor inimiga)
@@ -44,7 +45,7 @@ public abstract class Peca{
             else{
                 // movimento inválido
                 // deixa o jogador atual checked
-                this._undo_move(lastPos, destino);
+                this._undo_move(lastPos, destino, comeu);
                 return false;
             }
         }
@@ -52,28 +53,30 @@ public abstract class Peca{
     }
 
     public boolean legalMove(String destino) {
+        boolean comeu = false;
         String lastPos = this.getPosicao();
         if(this.isReachable(destino)) {
-            this._make_move(destino);
+           comeu = _make_move(destino);
             if(!this.getTabuleiro().isChecked(this.getCorDono())) {
                 return true;
             }
-            this._undo_move(lastPos, destino);
+            this._undo_move(lastPos, destino, comeu);
         }
         return false;
     }
 
     protected abstract boolean isReachable(String destino);
 
-    private void _make_move(String destino){
+    private boolean _make_move(String destino){
         // Internamente chamado por moverPeca quando o movimento é válido
         // Coloca a peça em destino
         this.setMovimentos(++movimentos);
         this.getTabuleiro().setEmpty(getPosicao());
-        this.getTabuleiro().setPeca(destino, this);
+        return(getTabuleiro().setPeca(destino, this));
     }
 
-    public void _undo_move(String lastPos, String destino){
+    //aqui
+    public void _undo_move(String lastPos, String destino, boolean comeu){
         // Internamente chamado por moverPeca quando o movimento é inválido
         // Coloca a peça em lastPos
         this.setMovimentos(--movimentos);

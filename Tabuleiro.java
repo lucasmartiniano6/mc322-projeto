@@ -5,6 +5,7 @@ public class Tabuleiro {
     private ArrayList<Peca> brancas = new ArrayList<>();
     private ArrayList<Peca> pretas = new ArrayList<>();
     private ArrayList<Pair> listaFensJogo = new ArrayList<>();
+    private ArrayList<Peca> pecasComidas = new ArrayList<>();
 
     public Tabuleiro(){
         // Inicializar o grid vazio
@@ -96,7 +97,9 @@ public class Tabuleiro {
         grid[x][y] = null;
     }
     
-    public void setPeca(String posicao, Peca peca){
+    public boolean setPeca(String posicao, Peca peca){
+        // true se houve captura, false cc
+        boolean returnFlag = false;
         int x = Peca.getPosX(posicao);
         int y = Peca.getPosY(posicao);
         if(this.grid[x][y] != null){
@@ -104,9 +107,12 @@ public class Tabuleiro {
                 brancas.remove(this.grid[x][y]);
             else
                 pretas.remove(this.grid[x][y]);
+            pecasComidas.add(grid[x][y]);
+            returnFlag = true;
         }
         this.grid[x][y] = peca;
         peca.setPosicao(posicao);
+        return returnFlag;
     }
 
     public Peca getPeca(String posicao){
