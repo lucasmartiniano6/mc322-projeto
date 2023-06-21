@@ -34,7 +34,7 @@ public abstract class Peca{
     private void _make_move(String destino){
         // Internamente chamado por moverPeca quando o movimento é válido
         // Coloca a peça em destino
-        this.setMovimentos(movimentos++);
+        this.setMovimentos(++movimentos);
         this.getTabuleiro().setEmpty(getPosicao());
         this.getTabuleiro().setPeca(destino, this);
     }
@@ -42,7 +42,7 @@ public abstract class Peca{
     private void _undo_move(String lastPos, String destino){
         // Internamente chamado por moverPeca quando o movimento é inválido
         // Coloca a peça em lastPos
-        this.setMovimentos(movimentos--);
+        this.setMovimentos(--movimentos);
         this.getTabuleiro().setEmpty(destino);
         this.getTabuleiro().setPeca(lastPos, this);
     }
