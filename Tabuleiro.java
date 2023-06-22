@@ -6,7 +6,8 @@ public class Tabuleiro {
     private ArrayList<Peca> pretas = new ArrayList<>();
     private ArrayList<Pair> listaFensJogo = new ArrayList<>();
     private ArrayList<Peca> pecasComidas = new ArrayList<>();
-    //private String anp
+    private String lastPlay = "preta";
+    private String enPassant = null;
 
     public Tabuleiro(){
         // Inicializar o grid vazio
@@ -83,6 +84,11 @@ public class Tabuleiro {
     public boolean mover(String origem, String destino){
         // Movimenta a peça da origem para o destino
         Peca peca = this.getPeca(origem);
+        if(peca.getCorDono().equals(getLastPlay())) {
+            return false;
+        } else {
+            setLastPlay(peca.getCorDono());
+        }
         try {
             boolean madeMove = peca.moverPeca(destino);
             String fen = FEN.generateFen(this);
@@ -142,6 +148,22 @@ public class Tabuleiro {
 
     public void setGrid(Peca[][] grid) {
         this.grid = grid;
+    }
+
+    public void setEnPassant(String pos) {
+        enPassant = pos;
+    }
+
+    public String getEnPassant() {
+        return enPassant;
+    }
+
+     public void setLastPlay(String lastPlay) {
+        this.lastPlay = lastPlay;
+    }
+
+    public String getLastPlay() {
+        return lastPlay;
     }
 
     public ArrayList<Peca> getBrancas() {
