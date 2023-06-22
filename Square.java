@@ -3,14 +3,12 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Square {
-    private static ArrayList<Square> selected = new ArrayList<>();
-    private static Square[][] squares = new Square[8][8];
+    private static ArrayList<Square> selected = new ArrayList<>(); // Guarda os dois squares selecionados (em verde)
+    private static Square[][] squares = new Square[8][8]; // Grid dos squares (mesma ordem do tabuleiro)
+    private final Tabuleiro tabuleiro;
     private JButton button;
-    private String icon;
-    private Tabuleiro tabuleiro;
+    private String icon; // imagem do square (mesma label da peca)
 
-    // constructor
-    // tempo dado indica os minutos
     public Square(int x, int y, String peca, JPanel panel, Tabuleiro tabuleiro){
         this.tabuleiro = tabuleiro;
 
@@ -28,6 +26,7 @@ public class Square {
     }         
 
     public static void printarTabuleiro(Tabuleiro tabuleiro){
+        // Printar o tabuleiro no terminal
         System.out.println("**************************");
         for(int j = 7; j >= 0; j--){
             System.out.print(j+1 + " ");
@@ -43,7 +42,7 @@ public class Square {
     }
 
     public void parSelected(){
-        // Caso tenha dois selecionados
+        // Caso tenha dois selecionados (em verde)
         int x1 = (selected.get(0).button.getX() / 100) + 1;
         int y1 = 8 - (selected.get(0).button.getY() / 100);
         int x2 = (selected.get(1).button.getX() / 100) + 1;
@@ -61,6 +60,7 @@ public class Square {
                     Peca peca = tabuleiro.getPeca(x, y);
                     Square square = squares[x][y];
                     if(peca == null){
+                        // Caso não tenha peca no tabuleiro (icon = "dark" ou "light" de fundo)
                         // linha par
                             // coluna par -> light
                             // coluna impar -> dark
@@ -74,6 +74,7 @@ public class Square {
                         square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
                     }
                     else if(!peca.getLabel().equals(square.icon)){
+                        // Caso tenha peca no tabuleiro e o icon do square não seja o mesmo da peca
                         square.icon = peca.getLabel();
                         square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
                     }
@@ -91,6 +92,7 @@ public class Square {
     public void action(){
         if(selected.size() == 1){ // Caso tenha dois selecionados
             for(Square s : selected){
+                // Desselecionar o square
                 if(s.icon.equals("dark_selected"))
                     s.icon = "dark";
                 else if(s.icon.equals("light_selected"))
@@ -100,11 +102,11 @@ public class Square {
                 s.button.setIcon(new ImageIcon("imgs/" + s.icon + ".png"));
             }
             selected.add(this);
-            parSelected();
+            parSelected(); // Verificar se o movimento é válido
             selected.clear();
         }
         else {
-            // if p is selected then unselect it
+            // Selecionar o square (em verde) ou desselecionar
             if(icon.equals("dark"))
                 icon = "dark_selected";
             else if(icon.equals("light"))

@@ -3,18 +3,17 @@ import java.awt.Dimension;
 import javax.swing.*;
 
 public class Janela {
-    JFrame window;
-    int size = 900;
-    Tabuleiro tabuleiro;
+    private JFrame window;
+    private int size = 900;
+    private final Tabuleiro tabuleiro;
 
-    // constructor
     public Janela(Tabuleiro tabuleiro){
         this.tabuleiro = tabuleiro;
         setWindow();  
         setBackground();
     }
 
-    // cria uma janela para o relogio
+    // cria uma janela
     public void setWindow(){
         this.window = new JFrame();
         window.setSize(size, size);
@@ -24,6 +23,7 @@ public class Janela {
         window.setVisible(true);
     }
 
+    // cria o background e as pecas
     public void setBackground(){
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 800, 800);
@@ -49,6 +49,7 @@ public class Janela {
         window.add(panel);
     }
 
+    // cria as pecas
     public void setPecas(JPanel panel){
         for(Peca peca : tabuleiro.getBrancas()){
             int x = Peca.getPosX(peca.getPosicao()) * 100;
