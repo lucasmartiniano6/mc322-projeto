@@ -1,5 +1,5 @@
 public class Bispo extends Peca{
-    public boolean isReachable(String destino) {
+    public boolean isReachable(String destino, boolean test) {
         // Implementação do movimento do Bispo
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
         int deltaY = Math.abs(getPosY(this.getPosicao()) - getPosY(destino));

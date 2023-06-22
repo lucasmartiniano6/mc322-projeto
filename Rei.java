@@ -1,5 +1,5 @@
 public class Rei extends Peca{
-    public boolean isReachable(String destino) {
+    public boolean isReachable(String destino, boolean test) {
         // Implementação do movimento do Rei
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
         int deltaY = Math.abs(getPosY(this.getPosicao()) - getPosY(destino));
@@ -24,7 +24,7 @@ public class Rei extends Peca{
                         if(this.getTabuleiro().getPeca("F1") == null && this.getTabuleiro().getPeca("G1") == null) { //Checa se não há nenhuma peça entre o Rei e a Torre
                             if(this.getTabuleiro().getPeca("H1") instanceof Torre && this.getTabuleiro().getPeca("H1").getMovimentos() == 0) {
                                 for(Peca peca : getTabuleiro().getPretas()) {
-                                    if(peca.isReachable("F1")) {
+                                    if(peca.isReachable("F1", true)) {
                                         return false;
                                     }
                                 }
@@ -37,7 +37,7 @@ public class Rei extends Peca{
                         if(this.getTabuleiro().getPeca("B1") == null && this.getTabuleiro().getPeca("C1") == null && this.getTabuleiro().getPeca("D1") == null) { //Checa se não há nenhuma peça entre o Rei e a Torre
                             if(this.getTabuleiro().getPeca("A1") instanceof Torre && this.getTabuleiro().getPeca("A1").getMovimentos() == 0) {
                                 for(Peca peca : getTabuleiro().getPretas()) {
-                                    if(peca.isReachable("D1")) {
+                                    if(peca.isReachable("D1", true)) {
                                         return false;
                                     }
                                 }
@@ -52,7 +52,7 @@ public class Rei extends Peca{
                         if(this.getTabuleiro().getPeca("F8") == null && this.getTabuleiro().getPeca("G8") == null) { //Checa se não há nenhuma peça entre o Rei e a Torre
                             if(this.getTabuleiro().getPeca("H8") instanceof Torre && this.getTabuleiro().getPeca("H8").getMovimentos() == 0) {
                                 for(Peca peca : getTabuleiro().getBrancas()) {
-                                    if(peca.isReachable("F8")) {
+                                    if(peca.isReachable("F8", true)) {
                                         return false;
                                     }
                                 }
@@ -65,7 +65,7 @@ public class Rei extends Peca{
                         if(this.getTabuleiro().getPeca("B8") == null && this.getTabuleiro().getPeca("C8") == null && this.getTabuleiro().getPeca("D8") == null) { //Checa se não há nenhuma peça entre o Rei e a Torre
                             if(this.getTabuleiro().getPeca("A8") instanceof Torre && this.getTabuleiro().getPeca("A8").getMovimentos() == 0) {
                                 for(Peca peca : getTabuleiro().getBrancas()) {
-                                    if(peca.isReachable("D8")) {
+                                    if(peca.isReachable("D8", true)) {
                                         return false;
                                     }
                                 }

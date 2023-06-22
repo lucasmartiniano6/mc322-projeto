@@ -4,6 +4,7 @@ public abstract class Peca{
     private String posicao; // Ex: "A1", "A8", "H1", "H8"
     private int movimentos;
     private String label; // Ex: "P", "B", "R", "Q", "K" (notação FEN)
+    public Peca peca = this;
 
     public Peca(String corDono, Tabuleiro tabuleiro, String posicao){
         this.corDono = corDono;
@@ -19,7 +20,9 @@ public abstract class Peca{
         String corDono = this.getCorDono();
         boolean comeu = false;
         String corAdversario = corDono.equals("branca") ? "preta" : "branca";
-        if(this.isReachable(destino)) {
+        if(this.isReachable(destino, false)) {
+            getTabuleiro().setEnPassantNow(getTabuleiro().getEnPassantNext());
+            getTabuleiro().setEnPassantNext(null);
             comeu = _make_move(destino);
             if(!getTabuleiro().isChecked(corDono)) {
                 // movimento válido do jogador atual (não me deixa checked)
@@ -74,7 +77,7 @@ public abstract class Peca{
     public boolean legalMove(String destino) {
         boolean comeu = false;
         String lastPos = this.getPosicao();
-        if(this.isReachable(destino)) {
+        if(this.isReachable(destino, true)) {
            comeu = _make_move(destino);
             if(!this.getTabuleiro().isChecked(this.getCorDono())) {
                 _undo_move(lastPos, destino, comeu);
@@ -85,14 +88,26 @@ public abstract class Peca{
         return false;
     }
 
-    protected abstract boolean isReachable(String destino);
+    public void setPeca(Peca peca) {
+        this.peca = peca;
+    }
+
+    protected abstract boolean isReachable(String destino, boolean test);
+
 
     private boolean _make_move(String destino){
         // Internamente chamado por moverPeca quando o movimento é válido
         // Coloca a peça em destino
-        this.setMovimentos(++movimentos);
-        this.getTabuleiro().setEmpty(getPosicao());
-        return(getTabuleiro().setPeca(destino, this));
+        peca.setMovimentos(++movimentos);
+        peca.getTabuleiro().setEmpty(getPosicao());
+        if(getCorDono().equals("preta")) {
+            getTabuleiro().getPretas().remove(this);
+            getTabuleiro().addPretas(peca);
+        } else if(getCorDono().equals("branca")) {
+            getTabuleiro().getBrancas().remove(this);
+            getTabuleiro().addBrancas(peca);
+        }
+        return(getTabuleiro().setPeca(destino, peca));
     }
 
     

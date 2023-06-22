@@ -10,7 +10,8 @@ public class Tabuleiro {
     private Relogio relogio_brancas;
     private Relogio relogio_pretas;
     private String lastPlay = "preta";
-    private String enPassant = null;
+    private String enPassantNow = null;
+    private String enPassantNext = null;
     public static boolean isOver = false;
 
     public Tabuleiro(){
@@ -57,6 +58,7 @@ public class Tabuleiro {
             System.out.println("Brancas e pretas devem ter o mesmo tamanho: " + e);
             throw new NullPointerException();
         }
+        adicionarTabuleiro(FEN.generateFen(this));
     }
 
     public boolean setBoardFromFEN(String filename){
@@ -143,6 +145,10 @@ public class Tabuleiro {
         int y = Peca.getPosY(posicao);
         grid[x][y] = null;
     }
+    
+    public void setEmpty(int x, int y){
+        grid[x][y] = null;
+    }
 
     public ArrayList<Peca> getPecasComidas() {
         return pecasComidas;
@@ -194,12 +200,20 @@ public class Tabuleiro {
         this.grid = grid;
     }
 
-    public void setEnPassant(String pos) {
-        enPassant = pos;
+    public void setEnPassantNow(String pos) {
+        enPassantNow = pos;
     }
 
-    public String getEnPassant() {
-        return enPassant;
+    public String getEnPassantNow() {
+        return enPassantNow;
+    }
+
+    public void setEnPassantNext(String pos) {
+        enPassantNext = pos;
+    }
+
+    public String getEnPassantNext() {
+        return enPassantNext;
     }
 
      public void setLastPlay(String lastPlay) {
@@ -248,7 +262,7 @@ public class Tabuleiro {
                 }
             }
             for(Peca peca : pretas) {
-                if(peca.isReachable(reiPos)) {
+                if(peca.isReachable(reiPos, true)) {
                     return true;
                 }
             }
@@ -261,7 +275,7 @@ public class Tabuleiro {
                 }
             }
             for(Peca peca : brancas) {
-                if(peca.isReachable(reiPos)) {
+                if(peca.isReachable(reiPos, true)) {
                     return true;
                 }
             }
