@@ -1,27 +1,30 @@
-import javax.lang.model.util.ElementScanner6;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Square {
-    JButton button;
-    String icon;
-    static ArrayList<Square> selected;
-    Tabuleiro tabuleiro;
+    private static ArrayList<Square> selected = new ArrayList<>();
+    private static Square[][] squares = new Square[8][8];
+    private JButton button;
+    private String icon;
+    private Tabuleiro tabuleiro;
 
     // constructor
     // tempo dado indica os minutos
     public Square(int x, int y, String peca, JPanel panel, Tabuleiro tabuleiro){
-        selected = new ArrayList<Square>();
         this.tabuleiro = tabuleiro;
 
-        icon = peca;
-        button = new JButton(new ImageIcon("imgs/" + icon + ".png"));    
+        this.icon = peca;
+        this.button = new JButton(new ImageIcon("imgs/" + icon + ".png"));    
 
-        button.setBounds(x, y, 100, 100);  
-        button.addActionListener(new ActionListener(){  
-        public void actionPerformed(ActionEvent e){action();}});  
+        this.button.setBounds(x, y, 100, 100);  
+        this.button.addActionListener(new ActionListener(){  
+            public void actionPerformed(ActionEvent e){action();}
+        });  
         panel.add(button);    
+
+        // map squares in a grid
+        squares[x/100][7-(y/100)] = this;
     }         
 
     public static void printarTabuleiro(Tabuleiro tabuleiro){
@@ -50,15 +53,23 @@ public class Square {
         String s1 = letra.substring(x1-1, x1) + y1;
         String s2 = letra.substring(x2-1, x2) + y2;
 
-        Square origem = selected.get(0);
-        Square destino = selected.get(1);
-
         if(tabuleiro.mover(s1, s2)){
-            destino.icon = origem.icon;
-            destino.button.setIcon(new ImageIcon("imgs/" + destino.icon + ".png"));
-
-            origem.icon = "light"; 
-            origem.button.setIcon(new ImageIcon("imgs/" + origem.icon + ".png"));
+            // Movimento válido
+            // Iterar por todas as pecas do grid (Tabuleiro) e atualizar o icon dos squares (interface) de acordo
+            for(int x=0; x<8; x++){
+                for(int y=0; y<8; y++){
+                    Peca peca = tabuleiro.getPeca(x, y);
+                    Square square = squares[x][y];
+                    if(peca == null){
+                        square.icon = "light";
+                        square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
+                    }
+                    else if(!peca.getLabel().equals(square.icon)){
+                        square.icon = peca.getLabel();
+                        square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
+                    }
+                }
+            }
 
             System.out.println(s1 + " " + s2);        
             printarTabuleiro(tabuleiro);

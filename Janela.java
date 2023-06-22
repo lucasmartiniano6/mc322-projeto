@@ -29,19 +29,10 @@ public class Janela {
         panel.setBounds(0, 0, 800, 800);
         panel.setBackground(Color.BLUE);
  
+        // setPecas
+        this.setPecas(panel);
 
-        for(Peca peca : tabuleiro.getBrancas()){
-            int x = Peca.getPosX(peca.getPosicao()) * 100;
-            int y = (7 - Peca.getPosY(peca.getPosicao())) * 100;
-            new Square(x, y, peca.getLabel(), panel, tabuleiro);
-        }
-        for(Peca peca : tabuleiro.getPretas()){
-            int x = Peca.getPosX(peca.getPosicao()) * 100;
-            int y = (7 - Peca.getPosY(peca.getPosicao())) * 100;
-            new Square(x, y, peca.getLabel(), panel, tabuleiro);
-        }
-
-
+        // setLinhas
         for(int y=200; y<600; y+=200){ // Linhas impares
             for(int x=0; x<800; x+=200){
                 new Square(x, y, "dark", panel, tabuleiro);
@@ -55,9 +46,22 @@ public class Janela {
             }
         }
 
-
         window.add(panel);
     }
+
+    public void setPecas(JPanel panel){
+        for(Peca peca : tabuleiro.getBrancas()){
+            int x = Peca.getPosX(peca.getPosicao()) * 100;
+            int y = (7 - Peca.getPosY(peca.getPosicao())) * 100;
+            new Square(x, y, peca.getLabel(), panel, tabuleiro);
+        }
+        for(Peca peca : tabuleiro.getPretas()){
+            int x = Peca.getPosX(peca.getPosicao()) * 100;
+            int y = (7 - Peca.getPosY(peca.getPosicao())) * 100;
+            new Square(x, y, peca.getLabel(), panel, tabuleiro);
+        }
+    }
+
 
     public JFrame getWindow(){
         return this.window;
