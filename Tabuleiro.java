@@ -86,14 +86,13 @@ public class Tabuleiro {
         Peca peca = this.getPeca(origem);
         if(peca.getCorDono().equals(getLastPlay())) {
             return false;
-        } else {
-            setLastPlay(peca.getCorDono());
         }
         try {
             boolean madeMove = peca.moverPeca(destino);
             String fen = FEN.generateFen(this);
             if(madeMove) {
                 adicionarTabuleiro(fen);
+                setLastPlay(peca.getCorDono());
             }
             return madeMove;
         } catch (NullPointerException e) {
