@@ -11,6 +11,7 @@ public class Janela {
         this.tabuleiro = tabuleiro;
         setWindow();  
         setBackground();
+        window.repaint();
     }
 
     // cria uma janela
