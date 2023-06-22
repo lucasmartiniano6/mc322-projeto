@@ -1,3 +1,4 @@
+import java.awt.Button;
 import java.util.Scanner;
 
 public class Main {
@@ -17,27 +18,25 @@ public class Main {
     }
     
     public static void main(String[] args){
-        
-        Scanner entrada = new Scanner(System.in);
         Tabuleiro tabuleiro = new Tabuleiro();
+        Janela janela = new Janela(tabuleiro);
 
-        // teste relogio
-        Relogio relogio1 = new Relogio(1, "brancas");
-        relogio1.startRelogio();
-        relogio1.timer.start();
+        // Relogio relogio1 = new Relogio(1, "brancas", janela);
+        // relogio1.startRelogio();
 
+        
+        // Scanner entrada = new Scanner(System.in);
 
-        printarTabuleiro(tabuleiro); // Debugging do tabuleiro
-        tabuleiro.saveBoard("fen/board.fen");
+        // printarTabuleiro(tabuleiro); // Debugging do tabuleiro
+        // tabuleiro.saveBoard("fen/board.fen");
 
-        // Debugging movimentos
-        tabuleiro.setBoardFromFEN("fen/board.fen");
-        while(true) {
-           String s1 = entrada.nextLine();
-           String s2 = entrada.nextLine();
-           tabuleiro.mover(s1, s2);
+        // // Debugging movimentos
+        // tabuleiro.setBoardFromFEN("fen/board.fen");
+        // while(true) {
+        //    String s1 = entrada.nextLine();
+        //    String s2 = entrada.nextLine();
+        //    tabuleiro.mover(s1, s2);
            
-           printarTabuleiro(tabuleiro);
-        }
+        //    printarTabuleiro(tabuleiro);
     }
 }

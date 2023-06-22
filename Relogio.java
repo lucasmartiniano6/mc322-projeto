@@ -12,23 +12,19 @@ public class Relogio {
 
     // constructor
     // tempo dado indica os minutos
-    public Relogio(int tempo, String corDono){
+    public Relogio(int tempo, String corDono, Janela janela){
         this.segundos = 0;
         this.minutos = tempo;
+        this.window = janela.getWindow();
         setWindowRelogio();  
     }
 
     // cria uma janela para o relogio
     public void setWindowRelogio(){
-        this.window = new JFrame();
-        window.setSize(100, 100);
-        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        label = new JLabel();
-        label= new JLabel(minutos + ":" + segundos);
-        label.setHorizontalAlignment(JLabel.CENTER);
+        label = new JLabel(minutos + ":" + segundos);
+        label.setHorizontalAlignment(1);
         label.setVerticalAlignment(JLabel.CENTER);
         window.add(label);
-        window.setVisible(true);
     }
 
     public void startRelogio(){
@@ -46,6 +42,7 @@ public class Relogio {
                 label.setText(minutos + ":" + segundos);
             }
         });
+        timer.start();
     }
 }
 
