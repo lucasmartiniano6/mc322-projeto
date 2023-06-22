@@ -6,6 +6,7 @@ public class Tabuleiro {
     private ArrayList<Peca> pretas = new ArrayList<>();
     private ArrayList<Pair> listaFensJogo = new ArrayList<>();
     private ArrayList<Peca> pecasComidas = new ArrayList<>();
+    //private String anp
 
     public Tabuleiro(){
         // Inicializar o grid vazio
@@ -83,8 +84,8 @@ public class Tabuleiro {
         // Movimenta a peça da origem para o destino
         Peca peca = this.getPeca(origem);
         try {
-            String fen = FEN.generateFen(this);
             boolean madeMove = peca.moverPeca(destino);
+            String fen = FEN.generateFen(this);
             if(madeMove) {
                 adicionarTabuleiro(fen);
             }
@@ -177,6 +178,7 @@ public class Tabuleiro {
             for(Peca peca : brancas) {
                 if(peca instanceof Rei) {
                     reiPos = peca.getPosicao();
+                    break;
                 }
             }
             for(Peca peca : pretas) {
@@ -189,6 +191,7 @@ public class Tabuleiro {
             for(Peca peca : pretas) {
                 if(peca instanceof Rei) {
                     reiPos = peca.getPosicao();
+                    break;
                 }
             }
             for(Peca peca : brancas) {
