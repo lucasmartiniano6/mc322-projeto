@@ -13,6 +13,28 @@ public class Square {
         this.tabuleiro = tabuleiro;
 
         this.icon = peca;
+        int x_map = x/100;
+        int y_map = 7-(y/100);
+        if((x_map+y_map)%2 == 0){
+            // light background
+            if(Character.isUpperCase(peca.charAt(0)))
+                this.icon = "white/" + peca + "_light"; // peca branca 
+            else
+                this.icon = "black/" + peca + "_light"; // peca preta
+        } 
+        else{
+            // dark background
+            if(Character.isUpperCase(peca.charAt(0)))
+                this.icon = "white/" + peca + "_dark"; // peca branca 
+            else
+                this.icon = "black/" + peca + "_dark"; // peca preta
+        }
+        
+        if(peca.equals("dark"))
+            this.icon = "dark";
+        else if(peca.equals("light"))
+            this.icon = "light";
+        
         this.button = new JButton(new ImageIcon("imgs/" + icon + ".png"));    
 
         this.button.setBounds(x, y, 100, 100);  
@@ -22,7 +44,7 @@ public class Square {
         panel.add(button);    
 
         // map squares in a grid
-        squares[x/100][7-(y/100)] = this;
+        squares[x_map][y_map] = this;
     }         
 
     public static void printarTabuleiro(Tabuleiro tabuleiro){
@@ -76,6 +98,18 @@ public class Square {
                     else if(!peca.getLabel().equals(square.icon)){
                         // Caso tenha peca no tabuleiro e o icon do square não seja o mesmo da peca
                         square.icon = peca.getLabel();
+                        if((x+y)%2 == 0){
+                            if(Character.isUpperCase(peca.getLabel().charAt(0)))
+                                square.icon = "white/" + square.icon + "_light";
+                            else
+                                square.icon = "black/" + square.icon + "_light";
+                        }
+                        else{
+                            if(Character.isUpperCase(peca.getLabel().charAt(0)))
+                                square.icon = "white/" + square.icon + "_dark";
+                            else
+                                square.icon = "black/" + square.icon + "_dark";
+                        }
                         square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
                     }
                 }
@@ -117,8 +151,11 @@ public class Square {
                 icon = "light";
             else if(icon.length() == 1)
                 icon = icon + "_selected";
-            else if(icon.substring(icon.length() - 9, icon.length()).equals("selected"))
+            else if(icon.substring(icon.length() - 9, icon.length()).equals("_selected"))
                 icon = icon.substring(0, icon.length() - 9);
+            else
+                icon = icon + "_selected";
+
 
             button.setIcon(new ImageIcon("imgs/" + icon + ".png"));    
             selected.add(this);
