@@ -61,7 +61,16 @@ public class Square {
                     Peca peca = tabuleiro.getPeca(x, y);
                     Square square = squares[x][y];
                     if(peca == null){
-                        square.icon = "light";
+                        // linha par
+                            // coluna par -> light
+                            // coluna impar -> dark
+                        // linha impar
+                            // coluna par -> dark
+                            // coluna impar -> light
+                        if((x+y)%2 == 0)
+                            square.icon = "light";
+                        else
+                            square.icon = "dark";
                         square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
                     }
                     else if(!peca.getLabel().equals(square.icon)){
