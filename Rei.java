@@ -63,6 +63,41 @@ public class Rei extends Peca{
         }
     }
 
+    public void _undo_move(String lastPos, String destino, boolean comeu){
+        // Internamente chamado por moverPeca quando o movimento é inválido
+        // Coloca a peça em lastPos
+        setMovimentos(getMovimentos()-1);
+        if(Math.abs(getPosX(lastPos) - getPosX(destino)) > 1) {
+            String pos = "";
+            String font = "";
+            if(getPosY(lastPos) == 0) {
+                if(getPosX(destino) == 2) {
+                    pos = "A1";
+                    font = "D1";
+                } else if(getPosX(destino) == 6) {
+                    pos = "H1";
+                    font = "F1";
+                }
+                getTabuleiro().setPeca(pos, getTabuleiro().getPeca(font));
+                getTabuleiro().setPeca("E1", this);
+            } else if(getPosY(lastPos) == 7) {
+                if(getPosX(destino) == 2) {
+                    pos = "A8";
+                    font = "D8";
+                } else if(getPosX(destino) == 6) {
+                    pos = "H8";
+                    font = "F8";
+                }
+                getTabuleiro().setPeca(pos, getTabuleiro().getPeca(font));
+                getTabuleiro().setPeca("E8", this);
+            }
+        } else {
+            getTabuleiro().setEmpty(destino);
+            getTabuleiro().setPeca(lastPos, this);
+        }
+    }
+
+
     public Rei(String corDono, Tabuleiro tabuleiro, String posicao){
         super(corDono, tabuleiro, posicao);
         if(corDono.equals("branca"))

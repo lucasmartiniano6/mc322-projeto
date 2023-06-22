@@ -85,7 +85,7 @@ public class Tabuleiro {
         // Movimenta a peça da origem para o destino
         Peca peca = this.getPeca(origem);
         if(peca == null) {
-            return false;
+            return false;   
         }
         if(peca.getCorDono().equals(getLastPlay())) {
             return false;

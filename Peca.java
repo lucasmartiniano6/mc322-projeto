@@ -45,7 +45,7 @@ public abstract class Peca{
             else{
                 // movimento inválido
                 // deixa o jogador atual checked
-                this._undo_move(lastPos, destino, comeu);
+                _undo_move(lastPos, destino, comeu);
                 return false;
             }
         }
@@ -58,10 +58,10 @@ public abstract class Peca{
         if(this.isReachable(destino)) {
            comeu = _make_move(destino);
             if(!this.getTabuleiro().isChecked(this.getCorDono())) {
-                this._undo_move(lastPos, destino, comeu);
+                _undo_move(lastPos, destino, comeu);
                 return true;
             }
-            this._undo_move(lastPos, destino, comeu); 
+            _undo_move(lastPos, destino, comeu); 
         }
         return false;
     }
