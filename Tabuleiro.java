@@ -83,8 +83,12 @@ public class Tabuleiro {
         // Movimenta a peça da origem para o destino
         Peca peca = this.getPeca(origem);
         try {
-            adicionarTabuleiro(FEN.generateFen(this));
-            return peca.moverPeca(destino);
+            String fen = FEN.generateFen(this);
+            boolean madeMove = peca.moverPeca(destino);
+            if(madeMove) {
+                adicionarTabuleiro(fen);
+            }
+            return madeMove;
         } catch (NullPointerException e) {
             System.out.println("Erro ao mover peça: " + e);
             return false;
