@@ -1,4 +1,3 @@
-import java.awt.Button;
 import java.util.Scanner;
 
 public class Main {

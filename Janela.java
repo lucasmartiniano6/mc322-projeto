@@ -25,19 +25,34 @@ public class Janela {
     }
 
     public void setBackground(){
-        boolean dark = true;
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 800, 800);
         panel.setBackground(Color.BLUE);
  
-         for(int y=0; y<800; y+=100){
+
+        for(Peca peca : tabuleiro.getBrancas()){
+            int x = Peca.getPosX(peca.getPosicao()) * 100;
+            int y = (7 - Peca.getPosY(peca.getPosicao())) * 100;
+            new Square(x, y, peca.getLabel(), panel, tabuleiro);
+        }
+        for(Peca peca : tabuleiro.getPretas()){
+            int x = Peca.getPosX(peca.getPosicao()) * 100;
+            int y = (7 - Peca.getPosY(peca.getPosicao())) * 100;
+            new Square(x, y, peca.getLabel(), panel, tabuleiro);
+        }
+
+
+        for(int y=200; y<600; y+=200){ // Linhas impares
             for(int x=0; x<800; x+=200){
-                new Square(x, y, dark, panel, tabuleiro);
+                new Square(x, y, "dark", panel, tabuleiro);
+                new Square(x+100, y, "light", panel, tabuleiro);
             }
-            for(int x=100; x<800; x+=200){
-                new Square(x, y, !dark, panel, tabuleiro);
+        }
+        for(int y=300; y<600; y+=200){ // Linhas pares
+            for(int x=0; x<800; x+=200){
+                new Square(x, y, "light", panel, tabuleiro);
+                new Square(x+100, y, "dark", panel, tabuleiro);
             }
-            dark = !dark;
         }
 
 
