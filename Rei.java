@@ -79,6 +79,7 @@ public class Rei extends Peca{
                     font = "F1";
                 }
                 getTabuleiro().setPeca(pos, getTabuleiro().getPeca(font));
+                getTabuleiro().getPeca(pos).setMovimentos(getTabuleiro().getPeca(pos).getMovimentos() - 1);
                 getTabuleiro().setPeca("E1", this);
             } else if(getPosY(lastPos) == 7) {
                 if(getPosX(destino) == 2) {
@@ -89,6 +90,7 @@ public class Rei extends Peca{
                     font = "F8";
                 }
                 getTabuleiro().setPeca(pos, getTabuleiro().getPeca(font));
+                getTabuleiro().getPeca(pos).setMovimentos(getTabuleiro().getPeca(pos).getMovimentos() - 1);
                 getTabuleiro().setPeca("E8", this);
             }
         } else { // verifica se o movimento do rei é inválido
