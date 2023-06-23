@@ -21,23 +21,42 @@ public abstract class Peca{
         String corAdversario = corDono.equals("branca") ? "preta" : "branca";
         if(this.isReachable(destino)) {
             comeu = _make_move(destino);
-            if(!this.getTabuleiro().isChecked(corDono)) {
+            if(!getTabuleiro().isChecked(corDono)) {
                 // movimento válido do jogador atual (não me deixa checked)
                 // se é checked (cor inimiga)
                 //  -> se é mate --> END GAME (checkmate)
                 //  -> senão -> continue
                 // senão é checked (cor inimiga)
                 //  -> se é mate --> END GAME (afogamento)
-                if(this.getTabuleiro().isChecked(corAdversario)) {
-                    if(this.getTabuleiro().noMoves(corAdversario)) {
+                if(getTabuleiro().isChecked(corAdversario)) {
+                    if(getTabuleiro().noMoves(corAdversario)) {
                         // END GAME (checkmate)
                         Tabuleiro.endGame("xeque-mate", corDono);
                     }
                 }
                 else {
-                    if(this.getTabuleiro().noMoves(corAdversario)) {
+                    if(getTabuleiro().noMoves(corAdversario)) {
                         // END GAME (afogamento)
-                        this.getTabuleiro().endGame("afogamento"); 
+                        getTabuleiro().endGame("afogamento"); 
+                    }
+                }
+                if(comeu) {
+                    if(getTabuleiro().getBrancas().size() == 1 && getTabuleiro().getPretas().size() == 1) {
+                        getTabuleiro().endGame("insuficiência de material");
+                    }
+                    else if(getTabuleiro().getBrancas().size() == 1 && getTabuleiro().getPretas().size() == 2) {
+                        for(Peca peca : getTabuleiro().getPretas()) {
+                            if(peca instanceof Cavalo || peca instanceof Bispo) {
+                                getTabuleiro().endGame("insuficiência de material");
+                            }
+                        }
+                    }
+                    else if(getTabuleiro().getBrancas().size() == 2 && getTabuleiro().getPretas().size() == 1) {
+                        for(Peca peca : getTabuleiro().getBrancas()) {
+                            if(peca instanceof Cavalo || peca instanceof Bispo) {
+                                getTabuleiro().endGame("insuficiência de material");
+                            }
+                        }
                     }
                 }
                 return true;
