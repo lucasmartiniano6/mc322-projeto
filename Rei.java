@@ -92,8 +92,20 @@ public class Rei extends Peca{
                 getTabuleiro().setPeca("E8", this);
             }
         } else {
-            getTabuleiro().setEmpty(destino);
-            getTabuleiro().setPeca(lastPos, this);
+             if(comeu) {
+                Peca pecaRemov = getTabuleiro().getPecasComidas().get(getTabuleiro().getPecasComidas().size()-1);
+                if(pecaRemov.getCorDono().equals("branca")) {
+                    getTabuleiro().addBrancas(pecaRemov);
+                } else if(pecaRemov.getCorDono().equals("preta")) {
+                    getTabuleiro().addPretas(pecaRemov);
+                }
+                getTabuleiro().setPeca(lastPos, this);
+                getTabuleiro().setPeca(destino, pecaRemov);
+                getTabuleiro().getPecasComidas().remove(pecaRemov);
+                } else {
+                    getTabuleiro().setEmpty(destino);
+                    getTabuleiro().setPeca(lastPos, this);
+                }
         }
     }
 

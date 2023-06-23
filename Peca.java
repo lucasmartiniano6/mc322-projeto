@@ -31,7 +31,7 @@ public abstract class Peca{
                 if(this.getTabuleiro().isChecked(corAdversario)) {
                     if(this.getTabuleiro().noMoves(corAdversario)) {
                         // END GAME (checkmate)
-                        this.getTabuleiro().endGame("xeque-mate", corDono);
+                        Tabuleiro.endGame("xeque-mate", corDono);
                     }
                 }
                 else {
