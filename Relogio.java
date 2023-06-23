@@ -66,6 +66,10 @@ public class Relogio {
                 }
                 if (minutos  == 0 && segundos == 0){
                     timer.stop();
+                    if(getCorDono().equals("branca"))
+                        Tabuleiro.endGame("O tempo do jogador acabou", "preta");
+                    else
+                        Tabuleiro.endGame("O tempo do jogador acabou", "branca");
                 }
                 label.setText(minutos + ":" + segundos);
             }

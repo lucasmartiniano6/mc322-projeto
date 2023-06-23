@@ -7,11 +7,8 @@ public class JanelaChess extends Window {
     private int size;
 
     public JanelaChess(Tabuleiro tabuleiro){
-        super(tabuleiro);
-        
-        
+        super(tabuleiro);   
     }
-
 
     // cria uma janela
     public void gerarJanela(){

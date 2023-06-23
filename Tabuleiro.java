@@ -274,7 +274,7 @@ public class Tabuleiro {
         return true;
     }
 
-    public void endGame(String motivo, String corGanhador) {
+    public static void endGame(String motivo, String corGanhador) {
         System.out.println(corGanhador + "s vencem!");
         System.out.println("Motivo: " + motivo);
         System.exit(0);
