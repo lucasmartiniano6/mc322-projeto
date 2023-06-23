@@ -21,9 +21,12 @@ public class Peao extends Peca{
         if (deltaY == 2){
             if(this.getMovimentos() > 0 || deltaX != 0) // Já se movimentou ou está tentando se mover para o lado
                 return false;
-            if(this.getTabuleiro().getPeca(nx, ny) != null) // Caso a posição não esteja vazia
-                return false;
-            
+            if(ny < getPosY(this.getPosicao())){
+                if(this.getTabuleiro().getPeca(nx, ny) != null || this.getTabuleiro().getPeca(nx, ny + 1) != null) // Caso a posição não esteja vazia
+                    return false;                                                                                  //ou exista uma peça no caminho
+            } else if (ny > getPosY(this.getPosicao()))
+                if(this.getTabuleiro().getPeca(nx, ny) != null || this.getTabuleiro().getPeca(nx, ny - 1) != null) // Caso a posição não esteja vazia
+                    return false;                                                                                  //ou exista uma peça no caminho
             return true;
         }        
         else if (deltaY == 1){

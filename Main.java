@@ -1,8 +1,10 @@
 public class Main {
+
+
     public static void main(String[] args){
         Tabuleiro tabuleiro = new Tabuleiro();
-        Janela janela = new Janela(tabuleiro);
-
+        new MenuPrincipal(tabuleiro);
+        
         // Relogio relogio1 = new Relogio(1, "brancas", janela);
         // relogio1.startRelogio();
 

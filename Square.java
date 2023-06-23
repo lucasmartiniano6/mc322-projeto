@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+import java.awt.Container;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -9,7 +11,7 @@ public class Square {
     private JButton button;
     private String icon; // imagem do square (mesma label da peca)
 
-    public Square(int x, int y, String peca, JPanel panel, Tabuleiro tabuleiro){
+    public Square(int x, int y, String peca, Container panel, Tabuleiro tabuleiro){
         this.tabuleiro = tabuleiro;
 
         this.icon = peca;
@@ -37,12 +39,12 @@ public class Square {
         
         this.button = new JButton(new ImageIcon("imgs/" + icon + ".png"));    
 
-        this.button.setBounds(x, y, 100, 100);  
+        this.button.setBounds(x, y+25, 100, 100);  
         this.button.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){action();}
         });  
         panel.add(button);    
-
+        
         // map squares in a grid
         squares[x_map][y_map] = this;
     }         
@@ -66,9 +68,9 @@ public class Square {
     public void parSelected(){
         // Caso tenha dois selecionados (em verde)
         int x1 = (selected.get(0).button.getX() / 100) + 1;
-        int y1 = 8 - (selected.get(0).button.getY() / 100);
+        int y1 = 8 - ((selected.get(0).button.getY() / 100));
         int x2 = (selected.get(1).button.getX() / 100) + 1;
-        int y2 = 8 - (selected.get(1).button.getY() / 100);
+        int y2 = 8 - ((selected.get(1).button.getY() / 100));
 
         String letra = "ABCDEFGH";
         String s1 = letra.substring(x1-1, x1) + y1;

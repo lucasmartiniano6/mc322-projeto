@@ -1,33 +1,61 @@
 import javax.swing.*;
+
+import java.awt.Color;
 import java.awt.event.*;
 
 public class Relogio {
-    String corDono;
-    int tempo;
-    JFrame window;
-    JLabel label;
-    int minutos;
-    int segundos;
-    Timer timer;
-
+    private String corDono;
+    private boolean iniciado;
+    private JLabel label;
+    private int minutos;
+    private int segundos;
+    private Timer timer;
     // constructor
     // tempo dado indica os minutos
-    public Relogio(int tempo, String corDono, Janela janela){
+
+    // public void setTimer(Timer timer) {
+    //     this.timer = timer;
+    //     iniciado = false;
+    // }
+
+
+    public Relogio(int tempo, String corDono){
         this.segundos = 0;
+        this.corDono =corDono;
         this.minutos = tempo;
-        this.window = janela.getWindow();
-        setWindowRelogio();  
+        this.iniciado = false;
+        setLabelRelogio();
     }
 
+
+    public boolean isStarted(){
+        return iniciado;
+    }
+
+    public String getCorDono() {
+        return corDono;
+    }
+
+    public Timer getTimer(){
+        return timer;
+    }
+
+    
     // cria uma janela para o relogio
-    public void setWindowRelogio(){
-        label = new JLabel(minutos + ":" + segundos);
-        label.setHorizontalAlignment(1);
+    public void setLabelRelogio(){
+        this.label = new JLabel(minutos + ":" + segundos);
+        label.setBackground(Color.BLACK);
+        label.setHorizontalAlignment(JLabel.CENTER);
         label.setVerticalAlignment(JLabel.CENTER);
-        window.add(label);
+        // window.add(label);
+    }
+
+    public JLabel getLabelRelogio(){
+        return label;
     }
 
     public void startRelogio(){
+        iniciado = true;
         this.timer = new Timer(1000, new ActionListener(){   
             public void actionPerformed(ActionEvent e){
                 if (segundos !=0){
@@ -42,6 +70,14 @@ public class Relogio {
                 label.setText(minutos + ":" + segundos);
             }
         });
+        timer.start();
+    }
+
+    public void pausaRelogio(Timer timer){
+        timer.stop();
+    }
+
+    public void despausaRelogio(Timer timer){
         timer.start();
     }
 }

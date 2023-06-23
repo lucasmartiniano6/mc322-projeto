@@ -6,6 +6,8 @@ public class Tabuleiro {
     private ArrayList<Peca> pretas = new ArrayList<>();
     private ArrayList<Pair> listaFensJogo = new ArrayList<>();
     private ArrayList<Peca> pecasComidas = new ArrayList<>();
+    private Relogio relogio_brancas;
+    private Relogio relogio_pretas;
     private String lastPlay = "preta";
     private String enPassant = null;
 
@@ -81,6 +83,30 @@ public class Tabuleiro {
         listaFensJogo.add(new Pair(fen));
     }
 
+   
+    private void playRelogio(String corJogador){
+        if(!relogio_brancas.getCorDono().equals(corJogador)){
+            relogio_brancas.despausaRelogio(relogio_brancas.getTimer());
+        } else{
+            if (!relogio_pretas.isStarted()){   
+                relogio_pretas.startRelogio();
+            }else{
+                relogio_pretas.despausaRelogio(relogio_pretas.getTimer());
+            }
+        }
+    }
+
+
+    private void pauseRelogio(String corJogador){
+        if(relogio_brancas.getCorDono().equals(corJogador)){
+            relogio_brancas.pausaRelogio(relogio_brancas.getTimer());
+        } else {
+            relogio_pretas.pausaRelogio(relogio_pretas.getTimer());
+        }
+    }
+    
+
+
     public boolean mover(String origem, String destino){
         // Movimenta a peça da origem para o destino
         Peca peca = this.getPeca(origem);
@@ -90,12 +116,17 @@ public class Tabuleiro {
         if(peca.getCorDono().equals(getLastPlay())) {
             return false;
         }
+        // playRelogio(peca);
         try {
             boolean madeMove = peca.moverPeca(destino);
             String fen = FEN.generateFen(this);
+            // playRelogio(peca);
             if(madeMove) {
                 adicionarTabuleiro(fen);
                 setLastPlay(peca.getCorDono());
+                pauseRelogio(peca.getCorDono());
+                playRelogio(peca.getCorDono());
+                
             }
             return madeMove;
         } catch (NullPointerException e) {
@@ -253,5 +284,24 @@ public class Tabuleiro {
         System.out.println("Empate!");
         System.out.println("Motivo: " + motivo);
         System.exit(0);
+    }
+
+    public Relogio getRelogio_brancas() {
+        return relogio_brancas;
+    }
+
+
+    public void setRelogio_brancas(Relogio relogio_brancas) {
+        this.relogio_brancas = relogio_brancas;
+    }
+
+
+    public Relogio getRelogio_pretas() {
+        return relogio_pretas;
+    }
+
+
+    public void setRelogio_pretas(Relogio relogio_pretas) {
+        this.relogio_pretas = relogio_pretas;
     }
 }
