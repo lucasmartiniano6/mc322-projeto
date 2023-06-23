@@ -67,7 +67,7 @@ public class Rei extends Peca{
         // Internamente chamado por moverPeca quando o movimento é inválido
         // Coloca a peça em lastPos
         setMovimentos(getMovimentos()-1);
-        if(Math.abs(getPosX(lastPos) - getPosX(destino)) > 1) {
+        if(Math.abs(getPosX(lastPos) - getPosX(destino)) > 1) { // Verifica se a tentativa de roque é inválida
             String pos = "";
             String font = "";
             if(getPosY(lastPos) == 0) {
@@ -91,7 +91,7 @@ public class Rei extends Peca{
                 getTabuleiro().setPeca(pos, getTabuleiro().getPeca(font));
                 getTabuleiro().setPeca("E8", this);
             }
-        } else {
+        } else { // verifica se o movimento do rei é inválido
              if(comeu) {
                 Peca pecaRemov = getTabuleiro().getPecasComidas().get(getTabuleiro().getPecasComidas().size()-1);
                 if(pecaRemov.getCorDono().equals("branca")) {
