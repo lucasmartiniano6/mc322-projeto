@@ -23,6 +23,11 @@ public class Rei extends Peca{
                     if(destino.equals("G1")) { // Roque menor do Rei das brancas
                         if(this.getTabuleiro().getPeca("F1") == null && this.getTabuleiro().getPeca("G1") == null) { //Checa se não há nenhuma peça entre o Rei e a Torre
                             if(this.getTabuleiro().getPeca("H1") instanceof Torre && this.getTabuleiro().getPeca("H1").getMovimentos() == 0) {
+                                for(Peca peca : getTabuleiro().getPretas()) {
+                                    if(peca.isReachable("F1")) {
+                                        return false;
+                                    }
+                                }
                                 this.getTabuleiro().getPeca("H1").moverPeca("F1");
                                 return true;
                             }
@@ -31,6 +36,11 @@ public class Rei extends Peca{
                     else if(destino.equals("C1")) { // Roque maior do Rei das brancas
                         if(this.getTabuleiro().getPeca("B1") == null && this.getTabuleiro().getPeca("C1") == null && this.getTabuleiro().getPeca("D1") == null) { //Checa se não há nenhuma peça entre o Rei e a Torre
                             if(this.getTabuleiro().getPeca("A1") instanceof Torre && this.getTabuleiro().getPeca("A1").getMovimentos() == 0) {
+                                for(Peca peca : getTabuleiro().getPretas()) {
+                                    if(peca.isReachable("D1")) {
+                                        return false;
+                                    }
+                                }
                                 this.getTabuleiro().getPeca("A1").moverPeca("D1");
                                 return true;
                             }
@@ -41,6 +51,11 @@ public class Rei extends Peca{
                     if(destino.equals("G8")) { // Roque menor do Rei das pretas
                         if(this.getTabuleiro().getPeca("F8") == null && this.getTabuleiro().getPeca("G8") == null) { //Checa se não há nenhuma peça entre o Rei e a Torre
                             if(this.getTabuleiro().getPeca("H8") instanceof Torre && this.getTabuleiro().getPeca("H8").getMovimentos() == 0) {
+                                for(Peca peca : getTabuleiro().getBrancas()) {
+                                    if(peca.isReachable("F8")) {
+                                        return false;
+                                    }
+                                }
                                 this.getTabuleiro().getPeca("H8").moverPeca("F8");
                                 return true;
                             }
@@ -49,6 +64,11 @@ public class Rei extends Peca{
                     else if(destino.equals("C8")){ // Roque maior do Rei das pretas
                         if(this.getTabuleiro().getPeca("B8") == null && this.getTabuleiro().getPeca("C8") == null && this.getTabuleiro().getPeca("D8") == null) { //Checa se não há nenhuma peça entre o Rei e a Torre
                             if(this.getTabuleiro().getPeca("A8") instanceof Torre && this.getTabuleiro().getPeca("A8").getMovimentos() == 0) {
+                                for(Peca peca : getTabuleiro().getBrancas()) {
+                                    if(peca.isReachable("D8")) {
+                                        return false;
+                                    }
+                                }
                                 this.getTabuleiro().getPeca("A8").moverPeca("D8");
                                 return true;
                             }
@@ -79,6 +99,7 @@ public class Rei extends Peca{
                     font = "F1";
                 }
                 getTabuleiro().setPeca(pos, getTabuleiro().getPeca(font));
+                getTabuleiro().getPeca(pos).setMovimentos(getTabuleiro().getPeca(pos).getMovimentos() - 1);
                 getTabuleiro().setPeca("E1", this);
             } else if(getPosY(lastPos) == 7) {
                 if(getPosX(destino) == 2) {
@@ -89,6 +110,7 @@ public class Rei extends Peca{
                     font = "F8";
                 }
                 getTabuleiro().setPeca(pos, getTabuleiro().getPeca(font));
+                getTabuleiro().getPeca(pos).setMovimentos(getTabuleiro().getPeca(pos).getMovimentos() - 1);
                 getTabuleiro().setPeca("E8", this);
             }
         } else { // verifica se o movimento do rei é inválido
@@ -108,7 +130,6 @@ public class Rei extends Peca{
                 }
         }
     }
-
 
     public Rei(String corDono, Tabuleiro tabuleiro, String posicao){
         super(corDono, tabuleiro, posicao);

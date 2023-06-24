@@ -5,6 +5,16 @@ public class Main {
         Tabuleiro tabuleiro = new Tabuleiro();
         new MenuPrincipal(tabuleiro);
         
+        // Tabuleiro tabuleiro = new Tabuleiro();
+        // Relogio relogio_brancas = new Relogio(10, "branca");
+        // Relogio relogio_pretas = new Relogio(10, "preta");
+        // tabuleiro.setRelogio_brancas(relogio_brancas);
+        // tabuleiro.setRelogio_pretas(relogio_pretas);
+        // JanelaChess janela = new JanelaChess(tabuleiro);
+        // janela.getWindow().repaint();
+        
+
+
         // Relogio relogio1 = new Relogio(1, "brancas", janela);
         // relogio1.startRelogio();
 
