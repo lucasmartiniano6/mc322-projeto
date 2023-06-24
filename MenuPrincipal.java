@@ -22,7 +22,6 @@ public class MenuPrincipal extends Window  {
 
     public void makeBackground(){
         setPanel(new JPanel());
-        setPanel(new JPanel());
         getPanel().setSize(getResolucao());
         
         // getPanel().setBounds(0, 0, getWindow().getWidth(), getWindow().getHeight());

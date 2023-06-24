@@ -6,7 +6,7 @@ public class Tabuleiro {
     private ArrayList<Peca> pretas = new ArrayList<>();
     private ArrayList<Pair> listaFensJogo = new ArrayList<>();
     private ArrayList<Peca> pecasComidas = new ArrayList<>();
-    JanelaChess janela;
+    private static JanelaChess  janela;
     private Relogio relogio_brancas;
     private Relogio relogio_pretas;
     private String lastPlay = "preta";
@@ -109,6 +109,7 @@ public class Tabuleiro {
     
 
 
+
     public boolean mover(String origem, String destino){
         // Movimenta a peça da origem para o destino
         Peca peca = this.getPeca(origem);
@@ -145,6 +146,14 @@ public class Tabuleiro {
 
     public ArrayList<Peca> getPecasComidas() {
         return pecasComidas;
+    }
+
+     public JanelaChess getJanela() {
+        return janela;
+    }
+
+    public void setJanela(JanelaChess janela) {
+        Tabuleiro.janela = janela;
     }
     
     //AQUI
@@ -279,13 +288,14 @@ public class Tabuleiro {
     public static void endGame(String motivo, String corGanhador) {
         System.out.println(corGanhador + "s vencem!");
         System.out.println("Motivo: " + motivo);
-        isOver = true;
+        janela.close(motivo, corGanhador);
+        
     }
 
     public void endGame(String motivo) {
         System.out.println("Empate!");
         System.out.println("Motivo: " + motivo);
-        isOver = true;
+        janela.close(motivo);
     }
 
     public Relogio getRelogio_brancas() {

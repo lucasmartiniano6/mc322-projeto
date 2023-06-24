@@ -16,7 +16,6 @@ public class Relogio {
     //     iniciado = false;
     // }
 
-
     public Relogio(int tempo, String corDono){
         this.segundos = 0;
         this.corDono =corDono;
@@ -71,6 +70,7 @@ public class Relogio {
                         Tabuleiro.endGame("O tempo do jogador acabou", "branca");
                 }
                 label.setText(minutos + ":" + segundos);
+               
             }
         });
         timer.start();

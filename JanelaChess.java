@@ -4,13 +4,13 @@ import java.awt.Dimension;
 import javax.swing.*;
 
 public class JanelaChess extends Window {
-    private int size;
     int x_proporcional = (int) (getResolucao().getWidth() * 0.45);
     int y_proporcional = (int) (getResolucao().getHeight() * 0.85);
     
     
     public JanelaChess(Tabuleiro tabuleiro){
         super(tabuleiro);   
+        getTabuleiro().setJanela(this);
     }
 
     // cria uma janela
@@ -95,7 +95,81 @@ public class JanelaChess extends Window {
         }
     }
      
-    public void close(){
+
+
+    public void getEndingWindow(String motivo, String corGanhador){
+        JFrame janela_fim = new JFrame();
+        janela_fim.setLayout(null);
+        janela_fim.setSize(400, 100);
+        janela_fim.setVisible(true);
+        janela_fim.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        janela_fim.setLocationRelativeTo(null);
+        janela_fim.getContentPane().setBackground(Color.WHITE);
+        
+        JPanel panel_ganhador = new JPanel();
+        panel_ganhador.setBackground(Color.WHITE);
+        panel_ganhador.setBounds(0 , 0, 400,30);
+        JLabel ganhador = new JLabel(corGanhador + "s vencem!");
+        ganhador.setVerticalAlignment(JLabel.TOP);
+        ganhador.setHorizontalAlignment(JLabel.CENTER);
+        ganhador.setForeground(Color.BLACK);
+
+        JPanel panel_motivo = new JPanel();
+        panel_motivo.setBackground(Color.WHITE);
+        panel_motivo.setBounds(0, janela_fim.getHeight()/4, 400,30);
+        JLabel label_motivo = new JLabel(motivo);
+        label_motivo.setVerticalAlignment(JLabel.CENTER);
+        label_motivo.setHorizontalAlignment(JLabel.CENTER);
+        ganhador.setForeground(Color.BLACK);
+        
+        panel_ganhador.add(ganhador);
+        panel_motivo.add(label_motivo);
+        janela_fim.add(panel_ganhador);
+        janela_fim.add(panel_motivo);
+        
+    }
+
+    public void getEndingWindow(String motivo){
+        JFrame janela_fim = new JFrame();
+        janela_fim.setLayout(null);
+        janela_fim.setSize(400, 100);
+        janela_fim.setVisible(true);
+        janela_fim.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        janela_fim.setLocationRelativeTo(null);
+        janela_fim.getContentPane().setBackground(Color.WHITE);
+        
+        JPanel panel_empate = new JPanel();
+        panel_empate.setBackground(Color.WHITE);
+        panel_empate.setBounds(0 , 0, 400,30);
+        JLabel empate = new JLabel("EMPATE!");
+        empate.setVerticalAlignment(JLabel.TOP);
+        empate.setHorizontalAlignment(JLabel.CENTER);
+        empate.setForeground(Color.BLACK);
+
+        JPanel panel_motivo = new JPanel();
+        panel_motivo.setBackground(Color.WHITE);
+        panel_motivo.setBounds(0, janela_fim.getHeight()/4, 400,30);
+        JLabel label_motivo = new JLabel("Motivo: " + motivo);
+        label_motivo.setVerticalAlignment(JLabel.CENTER);
+        label_motivo.setHorizontalAlignment(JLabel.CENTER);
+        empate.setForeground(Color.BLACK);
+        
+        panel_empate.add(empate);
+        panel_motivo.add(label_motivo);
+        janela_fim.add(panel_empate);
+        janela_fim.add(panel_motivo);
+    }
+
+
+    public void close(String motivo, String corGanhador){
+        getEndingWindow(motivo, corGanhador);
+        getWindow().dispose();
+    }
+
+    public void close(String motivo){
+        getEndingWindow(motivo);
+    
+
         getWindow().dispose();
     }
 
