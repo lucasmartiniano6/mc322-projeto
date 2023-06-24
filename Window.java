@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public abstract class Window {
     private JFrame window;
@@ -9,9 +11,12 @@ public abstract class Window {
         this.tabuleiro = tabuleiro;
         gerarJanela();
         makeBackground();
+        
     }
 
     
+    
+
     public abstract void makeBackground();
      
     public  abstract void gerarJanela();
@@ -30,6 +35,13 @@ public abstract class Window {
     }
     public void setPanel(JPanel panel) {
         this.panel = panel;
+    }
+
+    public Dimension getResolucao(){
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        
+        return tool.getScreenSize();
+      
     }
 
     public Tabuleiro getTabuleiro() {

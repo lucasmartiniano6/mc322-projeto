@@ -6,10 +6,12 @@ public class Tabuleiro {
     private ArrayList<Peca> pretas = new ArrayList<>();
     private ArrayList<Pair> listaFensJogo = new ArrayList<>();
     private ArrayList<Peca> pecasComidas = new ArrayList<>();
+    JanelaChess janela;
     private Relogio relogio_brancas;
     private Relogio relogio_pretas;
     private String lastPlay = "preta";
     private String enPassant = null;
+    public static boolean isOver = false;
 
     public Tabuleiro(){
         // Inicializar o grid vazio
@@ -277,13 +279,13 @@ public class Tabuleiro {
     public static void endGame(String motivo, String corGanhador) {
         System.out.println(corGanhador + "s vencem!");
         System.out.println("Motivo: " + motivo);
-        System.exit(0);
+        isOver = true;
     }
 
     public void endGame(String motivo) {
         System.out.println("Empate!");
         System.out.println("Motivo: " + motivo);
-        System.exit(0);
+        isOver = true;
     }
 
     public Relogio getRelogio_brancas() {

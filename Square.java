@@ -76,6 +76,7 @@ public class Square {
         String s1 = letra.substring(x1-1, x1) + y1;
         String s2 = letra.substring(x2-1, x2) + y2;
 
+        
         if(tabuleiro.mover(s1, s2)){
             // Movimento válido
             // Iterar por todas as pecas do grid (Tabuleiro) e atualizar o icon dos squares (interface) de acordo

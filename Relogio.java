@@ -1,6 +1,4 @@
 import javax.swing.*;
-
-import java.awt.Color;
 import java.awt.event.*;
 
 public class Relogio {
@@ -44,9 +42,10 @@ public class Relogio {
     // cria uma janela para o relogio
     public void setLabelRelogio(){
         this.label = new JLabel(minutos + ":" + segundos);
-        label.setBackground(Color.BLACK);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setVerticalAlignment(JLabel.CENTER);
+        label.repaint();
+    
         // window.add(label);
     }
 
