@@ -18,7 +18,7 @@ public class JanelaChess extends Window {
         setWindow(new JFrame());
          int x_proporcional = (int) (getResolucao().getWidth() * 0.45);
         int y_proporcional = (int) (getResolucao().getHeight() * 0.85);
-        getWindow().setBounds(x_proporcional, y_proporcional, 816, y_proporcional);
+        getWindow().setBounds(x_proporcional, y_proporcional, 815, y_proporcional);
         getWindow().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getWindow().setLayout(null);
         getWindow().setLocationRelativeTo(null);

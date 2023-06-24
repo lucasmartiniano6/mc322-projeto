@@ -52,21 +52,4 @@ public class MenuPrincipal extends Window  {
         getWindow().add(getPanel());
         
     }
-
-
-    // public static void main(String[] args){
-    //     JFrame Menu = new MenuPrincipal();
-        
-    //     Menu.setVisible(true);
-        
-        //  public static void main(String[] args){
-        // // Tabuleiro tabuleiro = new Tabuleiro();
-        // // Janela janela = new Janela(tabuleiro);
-        //   MenuPrincipal menu = new MenuPrincipal();
-        // //  Tabuleiro tabuleiro = new Tabuleiro();
-        // // Janela janela = new Janela(tabuleiro);
-        
-        //  }
-        
-    // }
 }

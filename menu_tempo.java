@@ -33,8 +33,8 @@ public class menu_tempo extends Window {
         opcao3.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
                 Tabuleiro tabuleiro = new Tabuleiro();
-                Relogio relogio_brancas = new Relogio(1, "branca");
-                Relogio relogio_pretas = new Relogio(1, "preta");
+                Relogio relogio_brancas = new Relogio(3, "branca");
+                Relogio relogio_pretas = new Relogio(3, "preta");
                 tabuleiro.setRelogio_brancas(relogio_brancas);
                 tabuleiro.setRelogio_pretas(relogio_pretas);
                 new JanelaChess(tabuleiro);
