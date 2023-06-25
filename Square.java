@@ -49,20 +49,44 @@ public class Square {
         squares[x_map][y_map] = this;
     }         
 
-    public static void printarTabuleiro(Tabuleiro tabuleiro){
-        // Printar o tabuleiro no terminal
-        System.out.println("**************************");
-        for(int j = 7; j >= 0; j--){
-            System.out.print(j+1 + " ");
-            for(int i = 0; i < 8; i++){
-                Peca peca = tabuleiro.getPeca(i, j);
-                if(peca == null) System.out.print(" . ");
-                else System.out.print(" " + peca.getLabel() + " ");
+    public void atualizarInterface(){
+        for(int x=0; x<8; x++){
+            for(int y=0; y<8; y++){
+                Peca peca = tabuleiro.getPeca(x, y);
+                Square square = squares[x][y];
+                if(peca == null){
+                    // Caso não tenha peca no tabuleiro (icon = "dark" ou "light" de fundo)
+                    // linha par
+                        // coluna par -> light
+                        // coluna impar -> dark
+                    // linha impar
+                        // coluna par -> dark
+                        // coluna impar -> light
+                    if((x+y)%2 == 0)
+                        square.icon = "light";
+                    else
+                        square.icon = "dark";
+                    square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
+                }
+                else if(!peca.getLabel().equals(square.icon)){
+                    // Caso tenha peca no tabuleiro e o icon do square não seja o mesmo da peca
+                    square.icon = peca.getLabel();
+                    if((x+y)%2 == 0){
+                        if(Character.isUpperCase(peca.getLabel().charAt(0)))
+                            square.icon = "white/" + square.icon + "_light";
+                        else
+                            square.icon = "black/" + square.icon + "_light";
+                    }
+                    else{
+                        if(Character.isUpperCase(peca.getLabel().charAt(0)))
+                            square.icon = "white/" + square.icon + "_dark";
+                        else
+                            square.icon = "black/" + square.icon + "_dark";
+                    }
+                    square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
+                }
             }
-            System.out.println();
         }
-        System.out.println("   A  B  C  D  E  F  G  H");
-        System.out.println("**************************");
     }
 
     public void parSelected(){
@@ -80,46 +104,9 @@ public class Square {
         if(tabuleiro.mover(s1, s2)){
             // Movimento válido
             // Iterar por todas as pecas do grid (Tabuleiro) e atualizar o icon dos squares (interface) de acordo
-            for(int x=0; x<8; x++){
-                for(int y=0; y<8; y++){
-                    Peca peca = tabuleiro.getPeca(x, y);
-                    Square square = squares[x][y];
-                    if(peca == null){
-                        // Caso não tenha peca no tabuleiro (icon = "dark" ou "light" de fundo)
-                        // linha par
-                            // coluna par -> light
-                            // coluna impar -> dark
-                        // linha impar
-                            // coluna par -> dark
-                            // coluna impar -> light
-                        if((x+y)%2 == 0)
-                            square.icon = "light";
-                        else
-                            square.icon = "dark";
-                        square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
-                    }
-                    else if(!peca.getLabel().equals(square.icon)){
-                        // Caso tenha peca no tabuleiro e o icon do square não seja o mesmo da peca
-                        square.icon = peca.getLabel();
-                        if((x+y)%2 == 0){
-                            if(Character.isUpperCase(peca.getLabel().charAt(0)))
-                                square.icon = "white/" + square.icon + "_light";
-                            else
-                                square.icon = "black/" + square.icon + "_light";
-                        }
-                        else{
-                            if(Character.isUpperCase(peca.getLabel().charAt(0)))
-                                square.icon = "white/" + square.icon + "_dark";
-                            else
-                                square.icon = "black/" + square.icon + "_dark";
-                        }
-                        square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
-                    }
-                }
-            }
-
+            atualizarInterface();
             System.out.println(s1 + " " + s2);        
-            printarTabuleiro(tabuleiro);
+            tabuleiro.printarTabuleiro();
         }
         else
             System.out.println("Movimento inválido");

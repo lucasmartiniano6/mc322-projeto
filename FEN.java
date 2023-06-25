@@ -65,8 +65,13 @@ public class FEN implements Data{
                             }
                         }
                     }
-                    if(peca != null)
-                        tabuleiro.setPeca(posicao, peca);
+                    if(peca != null){
+                        // setPeca
+                        int x = Peca.getPosX(posicao);
+                        int y = Peca.getPosY(posicao);
+                        tabuleiro.getGrid()[x][y] = peca;
+                        peca.setPosicao(posicao);
+                    }
                 }
                 posX++;
             }

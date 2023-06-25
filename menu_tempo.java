@@ -32,7 +32,7 @@ public class menu_tempo extends Window {
         
         opcao3.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
-                Tabuleiro tabuleiro = new Tabuleiro();
+                Tabuleiro tabuleiro = getTabuleiro();
                 Relogio relogio_brancas = new Relogio(3, "branca");
                 Relogio relogio_pretas = new Relogio(3, "preta");
                 tabuleiro.setRelogio_brancas(relogio_brancas);
@@ -44,7 +44,7 @@ public class menu_tempo extends Window {
         }); 
         opcao5.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
-                Tabuleiro tabuleiro = new Tabuleiro();
+                Tabuleiro tabuleiro = getTabuleiro();
                 Relogio relogio_brancas = new Relogio(5, "branca");
                 Relogio relogio_pretas = new Relogio(5, "preta");
                 tabuleiro.setRelogio_brancas(relogio_brancas);
@@ -54,7 +54,7 @@ public class menu_tempo extends Window {
         }); 
         opcao10.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
-                Tabuleiro tabuleiro = new Tabuleiro();          
+                Tabuleiro tabuleiro = getTabuleiro();
                 // Janela janela = new Janela(tabuleiro);
                 Relogio relogio_brancas = new Relogio(10, "branca");
                 Relogio relogio_pretas = new Relogio(10, "preta");

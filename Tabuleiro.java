@@ -72,6 +72,18 @@ public class Tabuleiro {
         return fen.save(filename, this);
     }
 
+    public void fischerInitializer(){
+        // Inicializa o tabuleiro com uma posição Fischer aleatória
+        // https://en.wikipedia.org/wiki/Fischer_random_chess
+        FEN fischer = new FEN();
+        String data = fischer.load("fen/fischer.fen");
+        String fens[] = data.split(" ");
+        // Seleciona uma posição aleatória entre as 960 posições possíveis
+        int random = (int)(Math.random() * 960);
+        System.out.println(random);
+        fischer._setBoard(fens[random], this);
+    }
+
     private void adicionarTabuleiro(String fen) {
         for(Pair par : listaFensJogo) {
             if(par.getFen().equals(fen)) {
@@ -297,6 +309,23 @@ public class Tabuleiro {
         System.out.println("Motivo: " + motivo);
         janela.close(motivo);
     }
+
+    public void printarTabuleiro(){
+        // Printar o tabuleiro no terminal
+        System.out.println("**************************");
+        for(int j = 7; j >= 0; j--){
+            System.out.print(j+1 + " ");
+            for(int i = 0; i < 8; i++){
+                Peca peca = this.getPeca(i, j);
+                if(peca == null) System.out.print(" . ");
+                else System.out.print(" " + peca.getLabel() + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("   A  B  C  D  E  F  G  H");
+        System.out.println("**************************");
+    }
+
 
     public Relogio getRelogio_brancas() {
         return relogio_brancas;
