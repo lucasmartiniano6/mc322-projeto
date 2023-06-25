@@ -12,7 +12,7 @@ public class Tabuleiro {
     private String lastPlay = "preta";
     private String enPassantNow = null;
     private String enPassantNext = null;
-    public static boolean isOver = false;
+    public int coldMoves = 0;
 
     public Tabuleiro(){
         // Inicializar o grid vazio
@@ -110,8 +110,6 @@ public class Tabuleiro {
     }
     
 
-
-
     public boolean mover(String origem, String destino){
         // Movimenta a peça da origem para o destino
         Peca peca = this.getPeca(origem);
@@ -206,6 +204,14 @@ public class Tabuleiro {
 
     public String getEnPassantNow() {
         return enPassantNow;
+    }
+
+    public void setColdMoves(int coldMoves) {
+        this.coldMoves = coldMoves;
+    }
+
+    public int getColdMoves() {
+        return coldMoves;
     }
 
     public void setEnPassantNext(String pos) {

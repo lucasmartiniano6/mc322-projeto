@@ -25,6 +25,14 @@ public abstract class Peca{
             getTabuleiro().setEnPassantNext(null);
             comeu = _make_move(destino);
             if(!getTabuleiro().isChecked(corDono)) {
+                if(!comeu && !(peca instanceof Peao)) {
+                    getTabuleiro().setColdMoves(getTabuleiro().getColdMoves() + 1);
+                    if(getTabuleiro().getColdMoves() == 50) {
+                        getTabuleiro().endGame("regra das 50 jogadas");
+                    }
+                } else {
+                    getTabuleiro().setColdMoves(0);
+                }
                 // movimento válido do jogador atual (não me deixa checked)
                 // se é checked (cor inimiga)
                 //  -> se é mate --> END GAME (checkmate)
