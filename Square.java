@@ -17,7 +17,7 @@ public class Square {
         this.icon = peca;
         int x_map = x/100;
         int y_map = 7-(y/100);
-        if((x_map+y_map)%2 == 0){
+        if((x_map+y_map)%2 != 0){
             // light background
             if(Character.isUpperCase(peca.charAt(0)))
                 this.icon = "white/" + peca + "_light"; // peca branca 
@@ -33,9 +33,9 @@ public class Square {
         }
         
         if(peca.equals("dark"))
-            this.icon = "dark";
-        else if(peca.equals("light"))
             this.icon = "light";
+        else if(peca.equals("light"))
+            this.icon = "dark";
         
         this.button = new JButton(new ImageIcon("imgs/" + icon + ".png"));    
 
@@ -93,15 +93,15 @@ public class Square {
                             // coluna par -> dark
                             // coluna impar -> light
                         if((x+y)%2 == 0)
-                            square.icon = "light";
-                        else
                             square.icon = "dark";
+                        else
+                            square.icon = "light";
                         square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
                     }
                     else if(!peca.getLabel().equals(square.icon)){
                         // Caso tenha peca no tabuleiro e o icon do square não seja o mesmo da peca
                         square.icon = peca.getLabel();
-                        if((x+y)%2 == 0){
+                        if((x+y)%2 != 0){
                             if(Character.isUpperCase(peca.getLabel().charAt(0)))
                                 square.icon = "white/" + square.icon + "_light";
                             else
