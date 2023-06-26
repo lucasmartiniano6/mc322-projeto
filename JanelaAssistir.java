@@ -6,6 +6,7 @@ import java.util.Timer;
 import javax.swing.*;
 
 public class JanelaAssistir extends Window {
+    // Janela para assistir uma partida
     public JanelaAssistir(Tabuleiro tabuleiro){
         super(tabuleiro);
         getTabuleiro().setJanela(this);

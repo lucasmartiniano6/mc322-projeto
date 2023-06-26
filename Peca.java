@@ -1,8 +1,8 @@
 public abstract class Peca{
     private final String corDono; // "branca" ou "preta"
-    private final Tabuleiro tabuleiro;
+    private final Tabuleiro tabuleiro; // tabuleiro ao qual a peça pertence
     private String posicao; // Ex: "A1", "A8", "H1", "H8"
-    private int movimentos;
+    private int movimentos; // Quantidade de movimentos feitos pela peça
     private String label; // Ex: "P", "B", "R", "Q", "K" (notação FEN)
     public Peca peca = this;
 

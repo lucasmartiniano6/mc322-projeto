@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 
 public class Tabuleiro {
+    // Tabuleiro de xadrez, contém as peças e suas posições
+    // O tabuleiro é representado por um grid 8x8 de peças
+    // As posições são representadas por letras de A até H e números de 1 até 8, mapeados para inteiros de 0 até 7
+
     private Peca[][] grid = new Peca[8][8];
     private ArrayList<Peca> brancas = new ArrayList<>();
     private ArrayList<Peca> pretas = new ArrayList<>();

@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class FEN implements Data{
     // Forsyth–Edwards Notation
     // https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
+    // Usado para representar o estado do tabuleiro
+    // Exemplo de início: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
 
     public String load(String filename){
         try {

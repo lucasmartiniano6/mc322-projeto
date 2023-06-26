@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Square {
+    // Quadrado individual do tabuleiro
     private static ArrayList<Square> selected = new ArrayList<>(); // Guarda os dois squares selecionados (em verde)
     private static Square[][] squares = new Square[8][8]; // Grid dos squares (mesma ordem do tabuleiro)
     private Tabuleiro tabuleiro;
