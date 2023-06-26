@@ -1,3 +1,23 @@
-Projeto MC322
+# Xadrez
+Projeto final de **MC322** - 1°semestre/2023
+* Lucas Martiniano - 231036
+* Daniel da Cruz - 260398
+* Guilherme Ferreira - 260469
+* Kairé Pereira - 260558
 
-A origem do grid(x,y) se encontra no quadrado A1 do tabuleiro de xadrez. O eixo X corresponde as letras (A, B, ..., H) e o eixo Y aos números (1, 2, ..., 8)
+![chessboard](imgs/screenshot.png)
+
+Implementation
+-----
+Diagram UML:
+
+Usage
+-----
+```java
+
+```
+Extra refs
+-----
+  * https://en.wikipedia.org/wiki/Chessboard
+  * https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
+  * https://en.wikipedia.org/wiki/Fischer_random_chess
