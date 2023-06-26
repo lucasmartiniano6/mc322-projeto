@@ -14,6 +14,15 @@ public class Tabuleiro {
     private String enPassantNow = null;
     private String enPassantNext = null;
     public int coldMoves = 0;
+    public boolean Over = false;
+
+    public boolean isOver() {
+        return Over;
+    }
+
+    public void setOver(boolean Over) {
+        this.Over = Over;
+    }
 
     public Tabuleiro(){
         // Inicializar o grid vazio
@@ -82,6 +91,7 @@ public class Tabuleiro {
             if(par.getFen().equals(fen)) {
                 par.increaseTimes();
                 if(par.getTimes() == 3) {
+                    setOver(true);
                     endGame("repetição"); //jogo acabou empatado (por repetição)
                 }
                 return;
@@ -322,6 +332,7 @@ public class Tabuleiro {
     public static void endGame(String motivo, String corGanhador) {
         System.out.println(corGanhador + "s vencem!");
         System.out.println("Motivo: " + motivo);
+        
         janela.close(motivo, corGanhador);
         
     }

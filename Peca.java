@@ -29,6 +29,7 @@ public abstract class Peca{
                 if(!comeu && !(peca instanceof Peao)) {
                     getTabuleiro().setColdMoves(getTabuleiro().getColdMoves() + 1);
                     if(getTabuleiro().getColdMoves() == 50) {
+                        getTabuleiro().setOver(true);
                         getTabuleiro().endGame("regra das 50 jogadas");
                     }
                 } else {
@@ -43,22 +44,26 @@ public abstract class Peca{
                 if(getTabuleiro().isChecked(corAdversario)) {
                     if(getTabuleiro().noMoves(corAdversario)) {
                         // END GAME (checkmate)
+                        getTabuleiro().setOver(true);
                         Tabuleiro.endGame("xeque-mate", corDono);
                     }
                 }
                 else {
                     if(getTabuleiro().noMoves(corAdversario)) {
                         // END GAME (afogamento)
+                        getTabuleiro().setOver(true);
                         getTabuleiro().endGame("afogamento"); 
                     }
                 }
                 if(comeu) {
                     if(getTabuleiro().getBrancas().size() == 1 && getTabuleiro().getPretas().size() == 1) {
+                        getTabuleiro().setOver(true);
                         getTabuleiro().endGame("insuficiência de material");
                     }
                     else if(getTabuleiro().getBrancas().size() == 1 && getTabuleiro().getPretas().size() == 2) {
                         for(Peca peca : getTabuleiro().getPretas()) {
                             if(peca instanceof Cavalo || peca instanceof Bispo) {
+                                getTabuleiro().setOver(true);
                                 getTabuleiro().endGame("insuficiência de material");
                             }
                         }
@@ -66,6 +71,7 @@ public abstract class Peca{
                     else if(getTabuleiro().getBrancas().size() == 2 && getTabuleiro().getPretas().size() == 1) {
                         for(Peca peca : getTabuleiro().getBrancas()) {
                             if(peca instanceof Cavalo || peca instanceof Bispo) {
+                                getTabuleiro().setOver(true);
                                 getTabuleiro().endGame("insuficiência de material");
                             }
                         }

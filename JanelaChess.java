@@ -193,15 +193,15 @@ public class JanelaChess extends Window {
 
 
     public void close(String motivo, String corGanhador){
-        getTabuleiro().pauseRelogio("branca");
-        getTabuleiro().pauseRelogio("preta");
+        getTabuleiro().getRelogio_brancas().pausaRelogio( getTabuleiro().getRelogio_brancas().getTimer());
+        getTabuleiro().getRelogio_pretas().pausaRelogio( getTabuleiro().getRelogio_pretas().getTimer());
         getEndingWindow(motivo, corGanhador);
         getWindow().dispose();
     }
 
     public void close(String motivo){
-        getTabuleiro().pauseRelogio("branca");
-        getTabuleiro().pauseRelogio("preta");
+        getTabuleiro().getRelogio_brancas().pausaRelogio( getTabuleiro().getRelogio_brancas().getTimer());
+        getTabuleiro().getRelogio_pretas().pausaRelogio( getTabuleiro().getRelogio_pretas().getTimer());
         getEndingWindow(motivo);
         getWindow().dispose();
     }

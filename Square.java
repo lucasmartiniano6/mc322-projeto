@@ -43,7 +43,8 @@ public class Square {
 
         this.button.setBounds(x, y+25, 100, 100);  
         this.button.addActionListener(new ActionListener(){  
-            public void actionPerformed(ActionEvent e){action();}
+            public void actionPerformed(ActionEvent e){
+                action();}
         });  
         panel.add(button);    
         
