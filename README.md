@@ -9,7 +9,7 @@ Projeto final de **MC322** - 1°semestre/2023
 
 Implementation
 -----
-Diagram UML:
+Diagrama UML:
 
 Usage
 -----
