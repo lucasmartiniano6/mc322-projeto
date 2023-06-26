@@ -1,9 +1,7 @@
 import javax.swing.*;
-import java.util.Timer;
 import java.awt.Container;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.TimerTask;
 
 public class Square {
     private static ArrayList<Square> selected = new ArrayList<>(); // Guarda os dois squares selecionados (em verde)
@@ -152,18 +150,6 @@ public class Square {
             }
             }
     }
-
-    // private static  void atualizaMov(Tabuleiro tabuleiro){
-    //     int delay = 6000;   // delay de 5 seg.
-        
-    //     Timer timer = new Timer();
-    //     timer.scheduleAtFixedRate(new TimerTask() {
-    //     public void run() {
-    //         // File fen = new File("fen/lastFens/" + "tabuleiro" + ".fen");
-    //         setMovimento(tabuleiro);
-    //         }
-    //     }, delay, delay);
-    // }
 
 
     public void parSelected(){

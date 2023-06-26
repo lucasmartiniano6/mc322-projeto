@@ -44,7 +44,6 @@ public class FEN implements Data{
         String[] linhas = fields[0].split("/");
         ArrayList<Peca> brancaJaUsada = new ArrayList<>();
         ArrayList<Peca> pretaJaUsada = new ArrayList<>();
-        String posicao_null = null;
         
         for(int i=0; i<linhas.length; i++){
             String linha = linhas[i];

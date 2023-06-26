@@ -1,15 +1,11 @@
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.util.TimerTask;
 import java.util.Timer;
 import javax.swing.*;
 
 public class JanelaAssistir extends Window {
-    private static int num = 0;
-
-
     public JanelaAssistir(Tabuleiro tabuleiro){
         super(tabuleiro);
         getTabuleiro().setJanela(this);
@@ -54,8 +50,6 @@ public class JanelaAssistir extends Window {
     }
 
     public static void atualizaMov(Tabuleiro tabuleiro){
-        int delay = 1000;   // delay de 5 seg.
-        int intervalo = 4000;
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
         public void run() {
