@@ -11,11 +11,7 @@ public abstract class Window {
         this.tabuleiro = tabuleiro;
         gerarJanela();
         makeBackground();
-        
     }
-
-    
-    
 
     public abstract void makeBackground();
      
@@ -39,7 +35,6 @@ public abstract class Window {
 
     public Dimension getResolucao(){
         Toolkit tool = Toolkit.getDefaultToolkit();
-        
         return tool.getScreenSize();
       
     }

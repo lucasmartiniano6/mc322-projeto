@@ -5,14 +5,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class menu_tempo extends Window {
+public class MenuTempo extends Window {
     private JButton opcao3;
     private JButton opcao5;
     private JButton opcao10;
     private JLabel label;
 
 
-    public menu_tempo(Tabuleiro tabuleiro){
+    public MenuTempo(Tabuleiro tabuleiro){
         super(tabuleiro);
     }
 
@@ -65,20 +65,12 @@ public class menu_tempo extends Window {
         });
         } 
         
-        public void gerarJanela(){
-            setWindow((new JFrame()));
-            getWindow().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            getWindow().setSize(200, 175);
-            getWindow().setLocationRelativeTo(null);
-            getWindow().setVisible(true);
+    public void gerarJanela(){
+        setWindow((new JFrame()));
+        getWindow().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        getWindow().setSize(200, 175);
+        getWindow().setLocationRelativeTo(null);
+        getWindow().setVisible(true);
     }
 
-    }
-    //   
-
-        
-        
-
-        
-
-    
+}

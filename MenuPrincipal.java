@@ -40,7 +40,7 @@ public class MenuPrincipal extends Window  {
         getPanel().add(end_button);
         play_button.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
-                new menu_tempo(getTabuleiro());
+                new MenuTempo(getTabuleiro());
             }
         });  
         // botoesmenu.setSize(200, 20);

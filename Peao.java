@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Peao extends Peca{
     public boolean isReachable(String destino, boolean test){
         // Implementação do movimento do Peão
@@ -81,27 +79,35 @@ public class Peao extends Peca{
         getTabuleiro().setPeca(destino, comido);
     }
 
-    public void promocao(boolean test) {
-        // Temporário
+    public void callPromocao(boolean test) {
+        // Não usada
         if(test) {
             return;
         }
-        System.out.println("Escolher a peca (n), (b), (q), (r)");
-        Scanner scanner = new Scanner(System.in);
-        String type = scanner.nextLine();
+        MenuPromocao menu = new MenuPromocao(getTabuleiro());
+        String type = null;
+        while(type == null) {
+            type = menu.getValor();
+        }
+    }
+
+    public void promocao(boolean test) {
+        if(test) {
+            return;
+        }
         Peca newPeca = null;
-        if(type.equals("n")) {
+        String type = "rainha";
+        if(type.equals("cavalo")) {
             newPeca = new Cavalo(getCorDono(), getTabuleiro(), getPosicao());
-        } else if(type.equals("b")) {
+        } else if(type.equals("bispo")) {
             newPeca = new Bispo(getCorDono(), getTabuleiro(), getPosicao());
-        } else if(type.equals("q")) {
+        } else if(type.equals("rainha")) {
             newPeca = new Rainha(getCorDono(), getTabuleiro(), getPosicao());
-        } else if(type.equals("r")) {
+        } else if(type.equals("torre")) {
             newPeca = new Torre(getCorDono(), getTabuleiro(), getPosicao());
         } else {
             return;
         }
-        // escolher a peca
         setPeca(newPeca);
     }
     

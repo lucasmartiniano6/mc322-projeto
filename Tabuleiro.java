@@ -12,7 +12,7 @@ public class Tabuleiro {
     private String lastPlay = "preta";
     private String enPassantNow = null;
     private String enPassantNext = null;
-    public int coldMoves = 0;
+    private int coldMoves = 0;
 
     public Tabuleiro(){
         // Inicializar o grid vazio
@@ -160,7 +160,6 @@ public class Tabuleiro {
         Tabuleiro.janela = janela;
     }
     
-    //AQUI
     public boolean setPeca(String posicao, Peca peca){
         // true se houve captura, false cc
         boolean returnFlag = false;
