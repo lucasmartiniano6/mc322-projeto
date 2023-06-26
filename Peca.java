@@ -10,6 +10,7 @@ public abstract class Peca{
         this.corDono = corDono;
         this.tabuleiro = tabuleiro;
         this.posicao = posicao;
+    
         this.movimentos = 0;
         if(corDono != "branca" && corDono != "preta")
             throw new IllegalArgumentException("Cor inválida");
@@ -70,6 +71,7 @@ public abstract class Peca{
                         }
                     }
                 }
+                // this.setPosicao(destino);
                 return true;
             }
             else{

@@ -1,14 +1,16 @@
 import javax.swing.*;
-
+import java.util.Timer;
 import java.awt.Container;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 public class Square {
     private static ArrayList<Square> selected = new ArrayList<>(); // Guarda os dois squares selecionados (em verde)
     private static Square[][] squares = new Square[8][8]; // Grid dos squares (mesma ordem do tabuleiro)
-    private final Tabuleiro tabuleiro;
+    private Tabuleiro tabuleiro;
     private JButton button;
+   
     private String icon; // imagem do square (mesma label da peca)
 
     public Square(int x, int y, String peca, Container panel, Tabuleiro tabuleiro){
@@ -49,6 +51,50 @@ public class Square {
         squares[x_map][y_map] = this;
     }         
 
+    public Square(int x, int y, String peca, Container panel){
+    
+        this.icon = peca;
+        int x_map = x/100;
+        int y_map = 7-(y/100);
+        if((x_map+y_map)%2 == 0){
+            // light background
+            if(Character.isUpperCase(peca.charAt(0)))
+                this.icon = "white/" + peca + "_light"; // peca branca 
+            else
+                this.icon = "black/" + peca + "_light"; // peca preta
+        } 
+        else{
+            // dark background
+            if(Character.isUpperCase(peca.charAt(0)))
+                this.icon = "white/" + peca + "_dark"; // peca branca 
+            else
+                this.icon = "black/" + peca + "_dark"; // peca preta
+        }
+        
+        if(peca.equals("dark"))
+            this.icon = "dark";
+        else if(peca.equals("light"))
+            this.icon = "light";
+        
+        this.button = new JButton(new ImageIcon("imgs/" + icon + ".png"));    
+
+        this.button.setBounds(x, y+25, 100, 100);  
+        panel.add(button);    
+        // map squares in a grid
+        squares[x_map][y_map] = this;
+        // int delay = 6000;   // delay de 5 seg.
+        // int interval = 1000;  // intervalo de 1 seg.
+        // Timer timer = new Timer();
+        // timer.scheduleAtFixedRate(new TimerTask() {
+        // public void run() {
+        //     // File fen = new File("fen/lastFens/" + "tabuleiro" + ".fen");
+            
+        //     }
+        // }, delay, delay);
+
+    }         
+
+
     public static void printarTabuleiro(Tabuleiro tabuleiro){
         // Printar o tabuleiro no terminal
         System.out.println("**************************");
@@ -64,6 +110,60 @@ public class Square {
         System.out.println("   A  B  C  D  E  F  G  H");
         System.out.println("**************************");
     }
+
+
+    public static void setMovimento(Tabuleiro tabuleiro){
+        for(int x=0; x<8; x++){
+            for(int y=0; y<8; y++){
+                Peca peca = tabuleiro.getPeca(x, y);
+                Square square = squares[x][y];
+                if(peca == null){
+                    // Caso não tenha peca no tabuleiro (icon = "dark" ou "light" de fundo)
+                    // linha par
+                        // coluna par -> light
+                        // coluna impar -> dark
+                    // linha impar
+                        // coluna par -> dark
+                        // coluna impar -> light
+                    if((x+y)%2 == 0)
+                        square.icon = "light";
+                    else
+                        square.icon = "dark";
+                    square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
+                }
+                else if(!peca.getLabel().equals(square.icon)){
+                    // Caso tenha peca no tabuleiro e o icon do square não seja o mesmo da peca
+                    square.icon = peca.getLabel();
+                    if((x+y)%2 == 0){
+                        if(Character.isUpperCase(peca.getLabel().charAt(0)))
+                            square.icon = "white/" + square.icon + "_light";
+                        else
+                            square.icon = "black/" + square.icon + "_light";
+                    }
+                    else{
+                        if(Character.isUpperCase(peca.getLabel().charAt(0)))
+                            square.icon = "white/" + square.icon + "_dark";
+                        else
+                            square.icon = "black/" + square.icon + "_dark";
+                    }
+                    square.button.setIcon(new ImageIcon("imgs/" + square.icon + ".png"));
+                }
+            }
+            }
+    }
+
+    // private static  void atualizaMov(Tabuleiro tabuleiro){
+    //     int delay = 6000;   // delay de 5 seg.
+        
+    //     Timer timer = new Timer();
+    //     timer.scheduleAtFixedRate(new TimerTask() {
+    //     public void run() {
+    //         // File fen = new File("fen/lastFens/" + "tabuleiro" + ".fen");
+    //         setMovimento(tabuleiro);
+    //         }
+    //     }, delay, delay);
+    // }
+
 
     public void parSelected(){
         // Caso tenha dois selecionados (em verde)

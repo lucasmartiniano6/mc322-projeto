@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FEN implements Data{
@@ -24,6 +25,15 @@ public class FEN implements Data{
         }
     }
 
+    // verifica se a peca na lista de pecas é a mesma peca sendo analisada na listaUsadas
+    public boolean verificaPeca(String posicao, Peca peca){
+        if(posicao.equals(peca.getPosicao())){
+            return true;
+        }
+        return false;
+    }
+
+
     public boolean _setBoard(String data, Tabuleiro tabuleiro){
         // Internamente chamado por setBoardFromFEN para colocar as peças no tabuleiro
         for(int i=0; i<8; i++)
@@ -32,9 +42,10 @@ public class FEN implements Data{
 
         String[] fields = data.split(" ");
         String[] linhas = fields[0].split("/");
-        boolean[] brancaJaUsada = new boolean[16];
-        boolean[] pretaJaUsada = new boolean[16];
-
+        ArrayList<Peca> brancaJaUsada = new ArrayList<>();
+        ArrayList<Peca> pretaJaUsada = new ArrayList<>();
+        String posicao_null = null;
+        
         for(int i=0; i<linhas.length; i++){
             String linha = linhas[i];
             int posX = 0;
@@ -50,23 +61,35 @@ public class FEN implements Data{
                     Peca peca = null;
                     if(Character.isUpperCase(c)){
                         for(int idx = 0; idx < tabuleiro.getBrancas().size(); idx++){
-                            if(tabuleiro.getBrancas().get(idx).getLabel().equals(Character.toString(c)) && !brancaJaUsada[idx]){
+                            if(tabuleiro.getBrancas().get(idx).getLabel().equals(Character.toString(c))){
                                 peca = tabuleiro.getBrancas().get(idx);
-                                brancaJaUsada[idx] = true;
+                                for(Peca p: brancaJaUsada){
+                                    if(p.equals(peca))
+                                        break;
+                                }
+                                brancaJaUsada.add(peca);
                                 break;
                             }
                         }
                     } else {
                         for(int idx = 0; idx < tabuleiro.getPretas().size(); idx++){
-                            if(tabuleiro.getPretas().get(idx).getLabel().equals(Character.toString(c)) && !pretaJaUsada[idx]){
+                            if(tabuleiro.getPretas().get(idx).getLabel().equals(Character.toString(c))){
                                 peca = tabuleiro.getPretas().get(idx);
-                                pretaJaUsada[idx] = true;
+                                for(Peca p: pretaJaUsada){
+                                    if(p.equals(peca))
+                                        break;
+                                }
+                                pretaJaUsada.add(peca);
                                 break;
                             }
                         }
                     }
-                    if(peca != null)
-                        tabuleiro.setPeca(posicao, peca);
+                    if(peca != null){
+                        int x = Peca.getPosX(posicao);
+                        int y = Peca.getPosY(posicao);
+                        tabuleiro.getGrid()[x][y] = peca;
+                        peca.setPosicao(posicao);
+                    }
                 }
                 posX++;
             }
@@ -98,11 +121,40 @@ public class FEN implements Data{
         return data;
     }
 
+    public File criarArquivoFen(){
+        String filename = "tabuleiro";
+        
+        File fen = new File("fen/lastFens/" + filename  + ".fen");
+        // Get the file
+        try{   
+            if(!fen.exists()){
+                fen.createNewFile();
+                return fen;
+            } else {
+                int num = 1;
+                fen = new File("fen/lastFens/" + filename + Integer.toString(num) + ".fen" );
+                while(fen.exists()){
+                    num++;
+                    fen = new File("fen/lastFens/" + filename + Integer.toString(num) + ".fen" );
+                }
+                fen.createNewFile();
+                return fen;
+            }
+            
+        }catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    }
+        
+       
+
+
     public boolean save(String filename, Tabuleiro tabuleiro){
         String data = generateFen(tabuleiro);
-
+        File fen = criarArquivoFen();
         try {
-            FileWriter writer = new FileWriter(filename);
+            FileWriter writer = new FileWriter(fen);
             writer.write(data);
             writer.close();
             return true;

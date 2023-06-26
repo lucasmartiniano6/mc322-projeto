@@ -10,8 +10,17 @@ public class JanelaChess extends Window {
     
     public JanelaChess(Tabuleiro tabuleiro){
         super(tabuleiro);   
+        
         getTabuleiro().setJanela(this);
+
     }
+
+    public JanelaChess(Tabuleiro tabuleiro, int delay){
+        super(tabuleiro);
+        getTabuleiro().setJanela(this);
+        watchGame();
+    }
+
 
     // cria uma janela
     public void gerarJanela(){
@@ -49,8 +58,26 @@ public class JanelaChess extends Window {
             }
         }
         gerarRelogios();
+        getWindow().getContentPane().repaint();
         // getWindow().add(panel);
     }
+
+     public void watchGame(){
+        this.setPecas(getWindow().getContentPane());
+        // setLinhas
+        for(int y=214; y<614; y+=200){ // Linhas impares
+            for(int x=0; x<800; x+=200){
+                new Square(x, y, "dark", getWindow().getContentPane());
+                new Square(x+100, y, "light", getWindow().getContentPane());
+            }
+        }
+        for(int y=314; y<614; y+=200){ // Linhas pares
+            for(int x=0; x<800; x+=200){
+                new Square(x, y, "light", getWindow().getContentPane());
+                new Square(x+100, y, "dark",getWindow().getContentPane());
+            }
+        }
+     }
 
 
 
@@ -72,6 +99,8 @@ public class JanelaChess extends Window {
         PanelRelogioPretas.add(LabelPretas);
         LabelPretas.setHorizontalAlignment(JLabel.CENTER);
         LabelPretas.setVerticalAlignment(JLabel.CENTER);
+        PanelRelogioBrancas.repaint();
+        PanelRelogioPretas.repaint();
         
         
         // getWindow().getContentPane().add(PanelRelogioBrancas);
@@ -102,6 +131,7 @@ public class JanelaChess extends Window {
         janela_fim.setLayout(null);
         janela_fim.setSize(400, 100);
         janela_fim.setVisible(true);
+        janela_fim.setResizable(false);
         janela_fim.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         janela_fim.setLocationRelativeTo(null);
         janela_fim.getContentPane().setBackground(Color.WHITE);
@@ -134,6 +164,7 @@ public class JanelaChess extends Window {
         janela_fim.setLayout(null);
         janela_fim.setSize(400, 100);
         janela_fim.setVisible(true);
+        janela_fim.setResizable(false);
         janela_fim.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         janela_fim.setLocationRelativeTo(null);
         janela_fim.getContentPane().setBackground(Color.WHITE);
@@ -162,14 +193,16 @@ public class JanelaChess extends Window {
 
 
     public void close(String motivo, String corGanhador){
+        getTabuleiro().pauseRelogio("branca");
+        getTabuleiro().pauseRelogio("preta");
         getEndingWindow(motivo, corGanhador);
         getWindow().dispose();
     }
 
     public void close(String motivo){
+        getTabuleiro().pauseRelogio("branca");
+        getTabuleiro().pauseRelogio("preta");
         getEndingWindow(motivo);
-    
-
         getWindow().dispose();
     }
 
