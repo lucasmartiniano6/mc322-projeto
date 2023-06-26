@@ -7,6 +7,7 @@ public class Tabuleiro {
     private ArrayList<Pair> listaFensJogo = new ArrayList<>();
     private ArrayList<Peca> pecasComidas = new ArrayList<>();
     private static JanelaChess  janela;
+    private static JanelaAssistir janela_a;
     private Relogio relogio_brancas;
     private Relogio relogio_pretas;
     private String lastPlay = "preta";
@@ -50,6 +51,7 @@ public class Tabuleiro {
             for(int i=0; i<brancas.size(); i++){
                 Peca branca = brancas.get(i);
                 this.setPeca(branca.getPosicao(), branca);
+                
 
                 Peca preta = pretas.get(i);
                 this.setPeca(preta.getPosicao(), preta);
@@ -64,10 +66,11 @@ public class Tabuleiro {
     public boolean setBoardFromFEN(String filename){
         // Lê um arquivo FEN e coloca as peças no tabuleiro de acordo
         FEN fen = new FEN();
-        String data = fen.load(filename);
+        
+        String data = fen.load("fen/lastFens/" +filename);
         if(data == null) return false;
         return fen._setBoard(data, this);
-    }
+    } 
 
     public boolean saveBoard(String filename){
         FEN fen = new FEN();
@@ -88,7 +91,7 @@ public class Tabuleiro {
     }
 
    
-    private void playRelogio(String corJogador){
+    public void playRelogio(String corJogador){
         if(!relogio_brancas.getCorDono().equals(corJogador)){
             relogio_brancas.despausaRelogio(relogio_brancas.getTimer());
         } else{
@@ -101,7 +104,7 @@ public class Tabuleiro {
     }
 
 
-    private void pauseRelogio(String corJogador){
+    public void pauseRelogio(String corJogador){
         if(relogio_brancas.getCorDono().equals(corJogador)){
             relogio_brancas.pausaRelogio(relogio_brancas.getTimer());
         } else {
@@ -123,8 +126,10 @@ public class Tabuleiro {
         try {
             boolean madeMove = peca.moverPeca(destino);
             String fen = FEN.generateFen(this);
+            
             // playRelogio(peca);
             if(madeMove) {
+                saveBoard(fen);
                 adicionarTabuleiro(fen);
                 setLastPlay(peca.getCorDono());
                 pauseRelogio(peca.getCorDono());
@@ -151,6 +156,15 @@ public class Tabuleiro {
     public ArrayList<Peca> getPecasComidas() {
         return pecasComidas;
     }
+
+    public static JanelaAssistir getJanela_a() {
+        return janela_a;
+    }
+
+    public  void setJanela(JanelaAssistir janela_a) {
+        Tabuleiro.janela_a = janela_a;
+    }
+
 
      public JanelaChess getJanela() {
         return janela;
@@ -307,6 +321,7 @@ public class Tabuleiro {
     public static void endGame(String motivo, String corGanhador) {
         System.out.println(corGanhador + "s vencem!");
         System.out.println("Motivo: " + motivo);
+        
         janela.close(motivo, corGanhador);
         
     }

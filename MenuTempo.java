@@ -1,5 +1,7 @@
 import java.awt.FlowLayout;
 import java.awt.event.*;
+import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,11 +12,22 @@ public class MenuTempo extends Window {
     private JButton opcao5;
     private JButton opcao10;
     private JLabel label;
+   
 
 
     public MenuTempo(Tabuleiro tabuleiro){
         super(tabuleiro);
     }
+
+    // exlcui os arquivos fen da pasta lastFens;
+    public void apagarPasta(){
+        File pasta = new File("fen/lastFens/" );
+        File[] listaFens = pasta.listFiles();  
+        for(int i = 0; i < listaFens.length; i ++){
+            listaFens[i].delete();
+        }
+    }
+
 
 
     public void makeBackground() {
@@ -32,6 +45,7 @@ public class MenuTempo extends Window {
         
         opcao3.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
+                apagarPasta();
                 Tabuleiro tabuleiro = new Tabuleiro();
                 Relogio relogio_brancas = new Relogio(3, "branca");
                 Relogio relogio_pretas = new Relogio(3, "preta");
@@ -44,6 +58,7 @@ public class MenuTempo extends Window {
         }); 
         opcao5.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
+                apagarPasta();
                 Tabuleiro tabuleiro = new Tabuleiro();
                 Relogio relogio_brancas = new Relogio(5, "branca");
                 Relogio relogio_pretas = new Relogio(5, "preta");
@@ -54,8 +69,8 @@ public class MenuTempo extends Window {
         }); 
         opcao10.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
-                Tabuleiro tabuleiro = new Tabuleiro();          
-                // Janela janela = new Janela(tabuleiro);
+                apagarPasta();
+                Tabuleiro tabuleiro = new Tabuleiro();
                 Relogio relogio_brancas = new Relogio(10, "branca");
                 Relogio relogio_pretas = new Relogio(10, "preta");
                 tabuleiro.setRelogio_brancas(relogio_brancas);
