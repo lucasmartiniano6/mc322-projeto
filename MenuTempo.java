@@ -14,7 +14,6 @@ public class MenuTempo extends Window {
     private JLabel label;
    
 
-
     public MenuTempo(Tabuleiro tabuleiro){
         super(tabuleiro);
     }
@@ -27,7 +26,6 @@ public class MenuTempo extends Window {
             listaFens[i].delete();
         }
     }
-
 
 
     public void makeBackground() {

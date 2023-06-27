@@ -1,4 +1,13 @@
 public class Bispo extends Peca{
+    // Construtor
+    public Bispo(String corDono, Tabuleiro tabuleiro, String posicao){
+        super(corDono, tabuleiro, posicao);
+        if(corDono.equals("branca"))
+            setLabel("B");
+        else
+            setLabel("b");
+    }
+
     public boolean isReachable(String destino, boolean test) {
         // Implementação do movimento do Bispo
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
@@ -51,13 +60,5 @@ public class Bispo extends Peca{
         else { // Caso a posição de destino esteja vazia
             return true;
         }
-    }
-
-    public Bispo(String corDono, Tabuleiro tabuleiro, String posicao){
-        super(corDono, tabuleiro, posicao);
-        if(corDono.equals("branca"))
-            setLabel("B");
-        else
-            setLabel("b");
     }
 }

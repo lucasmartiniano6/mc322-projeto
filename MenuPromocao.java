@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-
+// Classe não utilizada no código, realizaria a escolha de promoção
 public class MenuPromocao {
     private JFrame window;
     private JPanel panel;
@@ -20,11 +20,45 @@ public class MenuPromocao {
     private JLabel label;
     private String type = null;
 
-
+    // Construtor
     public MenuPromocao(Tabuleiro tabuleiro){
         this.tabuleiro = tabuleiro;
         gerarJanela();
         makeBackground();
+    }
+
+    // Gets e Sets
+    public String getValor() {
+        return type;
+    }
+
+    public void setValor(String type) {
+        this.type = type;
+    }
+
+    public void setWindow(JFrame window) {
+        this.window = window;
+    }
+
+    public JFrame getWindow(){
+        return window;
+    }
+    
+    public JPanel getPanel() {
+        return panel;
+    }
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
+    public Dimension getResolucao(){
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        return tool.getScreenSize();
+      
+    }
+
+    public Tabuleiro getTabuleiro() {
+        return tabuleiro;
     }
 
 
@@ -73,38 +107,6 @@ public class MenuPromocao {
         getWindow().revalidate();
         } 
 
-    public String getValor() {
-        return type;
-    }
-
-    public void setValor(String type) {
-        this.type = type;
-    }
-
-    public void setWindow(JFrame window) {
-        this.window = window;
-    }
-
-    public JFrame getWindow(){
-        return window;
-    }
-    
-    public JPanel getPanel() {
-        return panel;
-    }
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
-    }
-
-    public Dimension getResolucao(){
-        Toolkit tool = Toolkit.getDefaultToolkit();
-        return tool.getScreenSize();
-      
-    }
-
-    public Tabuleiro getTabuleiro() {
-        return tabuleiro;
-    }
         
     public void gerarJanela(){
         setWindow((new JFrame()));
@@ -113,6 +115,4 @@ public class MenuPromocao {
         getWindow().setLocationRelativeTo(null);
         getWindow().setVisible(true);
     }
-
-    }
-    //   
+}   

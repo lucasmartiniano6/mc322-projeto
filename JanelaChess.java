@@ -3,13 +3,12 @@ import java.awt.Container;
 import javax.swing.*;
 
 public class JanelaChess extends Window {
-    int x_proporcional = (int) (getResolucao().getWidth() * 0.45);
-    int y_proporcional = (int) (getResolucao().getHeight() * 0.85);
+    int xProporcional = (int) (getResolucao().getWidth() * 0.45);
+    int yProporcional = (int) (getResolucao().getHeight() * 0.85);
     
     
     public JanelaChess(Tabuleiro tabuleiro){
         super(tabuleiro);   
-        
         getTabuleiro().setJanela(this);
 
     }
@@ -24,15 +23,15 @@ public class JanelaChess extends Window {
     // cria uma janela
     public void gerarJanela(){
         setWindow(new JFrame());
-         int x_proporcional = (int) (getResolucao().getWidth() * 0.45);
-        int y_proporcional = (int) (getResolucao().getHeight() * 0.85);
-        getWindow().setBounds(x_proporcional, y_proporcional, 815, y_proporcional);
+         int xProporcional = (int) (getResolucao().getWidth() * 0.45);
+        int yProporcional = (int) (getResolucao().getHeight() * 0.85);
+        getWindow().setBounds(xProporcional, yProporcional, 815, yProporcional);
         getWindow().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getWindow().setLayout(null);
         getWindow().setLocationRelativeTo(null);
         getWindow().setResizable(false);
         getWindow().setVisible(true);
-        getWindow().getContentPane().setBounds(x_proporcional, y_proporcional, 815, y_proporcional);
+        getWindow().getContentPane().setBounds(xProporcional, yProporcional, 815, yProporcional);
         getWindow().getContentPane().setBackground(Color.WHITE);
         getWindow().repaint();
         getTabuleiro().getRelogio_brancas().startRelogio();
@@ -58,10 +57,10 @@ public class JanelaChess extends Window {
         }
         gerarRelogios();
         getWindow().getContentPane().repaint();
-        // getWindow().add(panel);
     }
 
-     public void watchGame(){
+    
+    public void watchGame(){
         this.setPecas(getWindow().getContentPane());
         // setLinhas
         for(int y=214; y<614; y+=200){ // Linhas impares
@@ -76,36 +75,32 @@ public class JanelaChess extends Window {
                 new Square(x+100, y, "dark",getWindow().getContentPane());
             }
         }
-     }
-
+    }
 
 
     public void gerarRelogios(){
         JPanel PanelRelogioBrancas = new JPanel();
         JPanel PanelRelogioPretas = new JPanel();
+
         getWindow().getContentPane().add(PanelRelogioBrancas);
         getWindow().getContentPane().add(PanelRelogioPretas);
-        PanelRelogioBrancas.setBounds(0,y_proporcional+845, 800, 40);;
-        PanelRelogioBrancas.setBackground(Color.WHITE);
+
+        // relogio brancas
+        PanelRelogioBrancas.setBounds(0, yProporcional+845, 800, 40);;
         JLabel LabelBrancas = getTabuleiro().getRelogio_brancas().getLabelRelogio();
+        PanelRelogioBrancas.setBackground(Color.WHITE);
         LabelBrancas.setForeground(Color.BLACK);
         PanelRelogioBrancas.add(LabelBrancas);
-        PanelRelogioPretas.setBounds(x_proporcional,y_proporcional + 5, 800, 40);
+
+        // relogio pretas
+        PanelRelogioPretas.setBounds(xProporcional, yProporcional + 5, 800, 40);
         JLabel LabelPretas = getTabuleiro().getRelogio_pretas().getLabelRelogio();
         LabelPretas.setForeground(Color.BLACK);
-        // LabelBrancas.setBounds(getWindow().getWidth()/2,getWindow().getHeight() - 5, 50, 50);
         PanelRelogioPretas.setBackground(Color.WHITE);
         PanelRelogioPretas.add(LabelPretas);
-        LabelPretas.setHorizontalAlignment(JLabel.CENTER);
-        LabelPretas.setVerticalAlignment(JLabel.CENTER);
-        PanelRelogioBrancas.repaint();
-        PanelRelogioPretas.repaint();
-        
-        
-        // getWindow().getContentPane().add(PanelRelogioBrancas);
 
-        
-        
+        PanelRelogioBrancas.repaint();
+        PanelRelogioPretas.repaint();     
     }
 
 
@@ -123,7 +118,6 @@ public class JanelaChess extends Window {
         }
     }
      
-
 
     public void getEndingWindow(String motivo, String corGanhador){
         JFrame janela_fim = new JFrame();
@@ -155,8 +149,8 @@ public class JanelaChess extends Window {
         panel_motivo.add(label_motivo);
         janela_fim.add(panel_ganhador);
         janela_fim.add(panel_motivo);
-        
     }
+
 
     public void getEndingWindow(String motivo){
         JFrame janela_fim = new JFrame();
@@ -198,14 +192,12 @@ public class JanelaChess extends Window {
         getWindow().dispose();
     }
 
+
     public void close(String motivo){
         getTabuleiro().getRelogio_brancas().pausaRelogio( getTabuleiro().getRelogio_brancas().getTimer());
         getTabuleiro().getRelogio_pretas().pausaRelogio( getTabuleiro().getRelogio_pretas().getTimer());
         getEndingWindow(motivo);
         getWindow().dispose();
     }
-
-
-
 }
 

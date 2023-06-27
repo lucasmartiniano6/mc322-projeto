@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Container;
 import java.util.TimerTask;
@@ -10,8 +9,6 @@ public class JanelaAssistir extends Window {
     public JanelaAssistir(Tabuleiro tabuleiro){
         super(tabuleiro);
         getTabuleiro().setJanela(this);
-        // atualizaMov();
-        
     }
 
     // cria uma janela
@@ -46,21 +43,17 @@ public class JanelaAssistir extends Window {
                 new Square(x+100, y, "dark",getWindow().getContentPane());
             }
         }
-        
-
     }
+
 
     public static void atualizaMov(Tabuleiro tabuleiro){
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
         public void run() {
-            // File fen = new File("fen/lastFens/" + "tabuleiro" + ".fen");
             Square.setMovimento(tabuleiro);
             }
         }, 0 ,2000);
     }
-
-    
 
 
     // cria as pecas
@@ -76,6 +69,4 @@ public class JanelaAssistir extends Window {
             new Square(x, y +14, peca.getLabel(), getWindow().getContentPane());
         }
     }
-     
-
 }

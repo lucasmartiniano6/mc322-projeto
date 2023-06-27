@@ -36,7 +36,7 @@ public class FEN implements Data{
     }
 
 
-    public boolean _setBoard(String data, Tabuleiro tabuleiro){
+    public boolean setBoard(String data, Tabuleiro tabuleiro){
         // Internamente chamado por setBoardFromFEN para colocar as peças no tabuleiro
         for(int i=0; i<8; i++)
             for(int j=0; j<8; j++)
@@ -98,6 +98,7 @@ public class FEN implements Data{
         return true;
     }
 
+
     public static String generateFen(Tabuleiro tabuleiro) {
         String data = "";
         for(int j=7; j>=0; j--){
@@ -121,6 +122,7 @@ public class FEN implements Data{
         }
         return data;
     }
+
 
     public File criarArquivoFen(){
         String filename = "tabuleiro";
@@ -148,8 +150,6 @@ public class FEN implements Data{
         }
     }
         
-       
-
 
     public boolean save(String filename, Tabuleiro tabuleiro){
         String data = generateFen(tabuleiro);
@@ -163,6 +163,5 @@ public class FEN implements Data{
             System.out.println("Erro ao escrever arquivo");
             return false;
         }
-
     }
 }

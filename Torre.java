@@ -1,4 +1,12 @@
 public class Torre extends Peca{
+    public Torre(String corDono, Tabuleiro tabuleiro, String posicao){
+        super(corDono, tabuleiro, posicao);
+        if(corDono.equals("branca"))
+            setLabel("R");
+        else
+            setLabel("r");
+    }
+
     public boolean isReachable(String destino, boolean test) {
         // Implementação do movimento da Torre
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
@@ -53,13 +61,5 @@ public class Torre extends Peca{
         else { // Caso a posição de destino esteja vazia
             return true;
         }
-    }
-
-    public Torre(String corDono, Tabuleiro tabuleiro, String posicao){
-        super(corDono, tabuleiro, posicao);
-        if(corDono.equals("branca"))
-            setLabel("R");
-        else
-            setLabel("r");
     }
 }

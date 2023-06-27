@@ -8,13 +8,6 @@ public class Relogio {
     private int minutos;
     private int segundos;
     private Timer timer;
-    // constructor
-    // tempo dado indica os minutos
-
-    // public void setTimer(Timer timer) {
-    //     this.timer = timer;
-    //     iniciado = false;
-    // }
 
     public Relogio(int tempo, String corDono){
         this.segundos = 0;
@@ -37,20 +30,18 @@ public class Relogio {
         return timer;
     }
 
-    
     // cria uma janela para o relogio
     public void setLabelRelogio(){
         this.label = new JLabel(minutos + ":" + segundos);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setVerticalAlignment(JLabel.CENTER);
         label.repaint();
-    
-        // window.add(label);
     }
 
     public JLabel getLabelRelogio(){
         return label;
     }
+
 
     public void startRelogio(){
         iniciado = true;
@@ -76,10 +67,12 @@ public class Relogio {
         timer.start();
     }
 
+
     public void pausaRelogio(Timer timer){
         timer.stop();
     }
 
+    
     public void despausaRelogio(Timer timer){
         timer.start();
     }

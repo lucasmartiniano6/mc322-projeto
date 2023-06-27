@@ -1,8 +1,17 @@
 public class Cavalo extends Peca {
+    // Constructor
+    public Cavalo(String corDono, Tabuleiro tabuleiro, String posicao){
+        super(corDono, tabuleiro, posicao);
+        if(corDono.equals("branca")){
+            setLabel("N");
+        }else
+            setLabel("n");
+    }
+
     public boolean isReachable(String destino, boolean test){
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
         int deltaY = Math.abs(getPosY(this.getPosicao()) - getPosY(destino));
-        
+
         // if((deltaX == 2 && deltaY != 1) || (deltaX == 1 && deltaY != 2) || (deltaY == 1 && deltaX != 2) || (deltaY == 2 && deltaX != 1)) {  // verifica se o movimento está no alcance do cavalo
         if((deltaX == 2 && deltaY == 1) || (deltaX == 1 && deltaY == 2)){
             //  semelhante ao rei
@@ -24,16 +33,5 @@ public class Cavalo extends Peca {
         else{
             return false;
         }
-    }
-
-
-
-    // Constructor
-    public Cavalo(String corDono, Tabuleiro tabuleiro, String posicao){
-        super(corDono, tabuleiro, posicao);
-        if(corDono.equals("branca")){
-            setLabel("N");
-        }else
-            setLabel("n");
     }
 }

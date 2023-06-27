@@ -82,16 +82,6 @@ public class Square {
         panel.add(button);    
         // map squares in a grid
         squares[x_map][y_map] = this;
-        // int delay = 6000;   // delay de 5 seg.
-        // int interval = 1000;  // intervalo de 1 seg.
-        // Timer timer = new Timer();
-        // timer.scheduleAtFixedRate(new TimerTask() {
-        // public void run() {
-        //     // File fen = new File("fen/lastFens/" + "tabuleiro" + ".fen");
-            
-        //     }
-        // }, delay, delay);
-
     }         
 
 
@@ -214,6 +204,7 @@ public class Square {
         
     }
 
+    
     public void action(){
         if(selected.size() == 1){ // Caso tenha dois selecionados
             for(Square s : selected){

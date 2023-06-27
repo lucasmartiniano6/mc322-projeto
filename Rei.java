@@ -1,4 +1,12 @@
 public class Rei extends Peca{
+    public Rei(String corDono, Tabuleiro tabuleiro, String posicao){
+        super(corDono, tabuleiro, posicao);
+        if(corDono.equals("branca"))
+            this.setLabel("K");
+        else
+            this.setLabel("k");
+    }
+
     public boolean isReachable(String destino, boolean test) {
         // Implementação do movimento do Rei
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
@@ -83,7 +91,8 @@ public class Rei extends Peca{
         }
     }
 
-    public void _undo_move(String lastPos, String destino, boolean comeu){
+    @Override
+    public void undoMove(String lastPos, String destino, boolean comeu){
         // Internamente chamado por moverPeca quando o movimento é inválido
         // Coloca a peça em lastPos
         setMovimentos(getMovimentos()-1);
@@ -124,18 +133,10 @@ public class Rei extends Peca{
                 getTabuleiro().setPeca(lastPos, this);
                 getTabuleiro().setPeca(destino, pecaRemov);
                 getTabuleiro().getPecasComidas().remove(pecaRemov);
-                } else {
-                    getTabuleiro().setEmpty(destino);
-                    getTabuleiro().setPeca(lastPos, this);
-                }
+            } else {
+                getTabuleiro().setEmpty(destino);
+                getTabuleiro().setPeca(lastPos, this);
+            }
         }
-    }
-
-    public Rei(String corDono, Tabuleiro tabuleiro, String posicao){
-        super(corDono, tabuleiro, posicao);
-        if(corDono.equals("branca"))
-            this.setLabel("K");
-        else
-            this.setLabel("k");
     }
 }

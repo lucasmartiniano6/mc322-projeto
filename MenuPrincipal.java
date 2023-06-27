@@ -11,7 +11,6 @@ public class MenuPrincipal extends Window  {
 
     public MenuPrincipal(Tabuleiro tabuleiro){
         super(tabuleiro);
-        
     }
 
     public void gerarJanela(){
@@ -24,25 +23,25 @@ public class MenuPrincipal extends Window  {
         getWindow().repaint();
     }
 
+
     public void makeBackground(){
         setPanel(new JPanel());
         getPanel().setSize(getResolucao());
         
-        // getPanel().setBounds(0, 0, getWindow().getWidth(), getWindow().getHeight());
-        System.out.println(getWindow().getWidth());
-        System.out.println(getWindow().getHeight());
-        System.out.println(getResolucao().getHeight());
         getPanel().setLayout(null);
         getPanel().setBackground(Color.GRAY);
+
         JButton play_button = new JButton();
         JButton end_button = new JButton();
         JButton watch_button = new JButton();
+
         play_button.setText("JOGAR");
         end_button.setText("SAIR");
         watch_button.setText("ASSISTIR JOGO");
         play_button.setBounds( (int) ((getResolucao().getWidth()/2) -100), (int) getResolucao().getHeight()/2 - 100, 200, 50);
         watch_button.setBounds( (int) ((getResolucao().getWidth()/2) -100), (int) getResolucao().getHeight()/2 - 30, 200, 50);
         end_button.setBounds((int) ((getResolucao().getWidth()/2) -100), (int) getResolucao().getHeight()/2 + 40, 200, 50);
+        
         getPanel().add(play_button);
         getPanel().add(end_button);
         getPanel().add(watch_button);
@@ -51,7 +50,6 @@ public class MenuPrincipal extends Window  {
                 new MenuTempo(getTabuleiro());
             }
         });  
-        // botoesmenu.setSize(200, 20);
         end_button.addActionListener(new ActionListener(){  
             public void actionPerformed(ActionEvent e){
                 System.exit(0);
@@ -87,30 +85,8 @@ public class MenuPrincipal extends Window  {
                         }
                 }
             }, delay, period);
-            
             }
-            
         });
         getWindow().add(getPanel());
-        
     }
 }
-
-// public void run() {
-//                         File fen = new File("fen/lastFens/");
-//                         if(num == 0){
-//                             JanelaWatch.getTabuleiro().setBoardFromFEN("tabuleiro.fen");
-//                             JanelaAssistir.atualizaMov(tabuleiro);
-//                             Square.printarTabuleiro(tabuleiro);
-//                             num++;
-//                         }else if (num > 0 && num < fen.listFiles().length){
-//                             JanelaWatch.getTabuleiro().setBoardFromFEN("tabuleiro" + Integer.toString(num) + ".fen");
-//                             JanelaAssistir.atualizaMov(tabuleiro);
-//                             Square.printarTabuleiro(tabuleiro);
-//                             num++;
-//                         if(num >= fen.listFiles().length){
-//                             num = 0;
-                            
-//                         }
-//                         }
-//                 }

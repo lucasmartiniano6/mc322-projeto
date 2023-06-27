@@ -1,4 +1,12 @@
 public class Rainha extends Peca{
+    public Rainha(String corDono, Tabuleiro tabuleiro, String posicao){
+        super(corDono, tabuleiro, posicao);
+        if(corDono.equals("branca"))
+            setLabel("Q");
+        else
+            setLabel("q");
+    }
+
     public boolean isReachable(String destino, boolean test) {
         // Implementação do movimento da Rainha
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
@@ -83,13 +91,5 @@ public class Rainha extends Peca{
         else { // Caso a posição de destino esteja vazia
             return true;
         }
-    }
-
-    public Rainha(String corDono, Tabuleiro tabuleiro, String posicao){
-        super(corDono, tabuleiro, posicao);
-        if(corDono.equals("branca"))
-            setLabel("Q");
-        else
-            setLabel("q");
     }
 }

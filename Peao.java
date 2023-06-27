@@ -1,4 +1,12 @@
 public class Peao extends Peca{
+    public Peao(String corDono, Tabuleiro tabuleiro, String posicao){
+        super(corDono, tabuleiro, posicao);
+        if(corDono.equals("branca"))
+            setLabel("P");
+        else
+            setLabel("p");
+    }
+
     public boolean isReachable(String destino, boolean test){
         // Implementação do movimento do Peão
         int deltaX = Math.abs(getPosX(this.getPosicao()) - getPosX(destino));
@@ -67,6 +75,7 @@ public class Peao extends Peca{
         return false;
     }
 
+
     public void enPassant(String destino) {
         int yval;
         if(getCorDono().equals("preta")) {
@@ -79,6 +88,7 @@ public class Peao extends Peca{
         getTabuleiro().setPeca(destino, comido);
     }
 
+
     public void callPromocao(boolean test) {
         // Não usada
         if(test) {
@@ -90,6 +100,7 @@ public class Peao extends Peca{
             type = menu.getValor();
         }
     }
+
 
     public void promocao(boolean test) {
         if(test) {
@@ -109,14 +120,5 @@ public class Peao extends Peca{
             return;
         }
         setPeca(newPeca);
-    }
-    
-
-    public Peao(String corDono, Tabuleiro tabuleiro, String posicao){
-        super(corDono, tabuleiro, posicao);
-        if(corDono.equals("branca"))
-            setLabel("P");
-        else
-            setLabel("p");
     }
 }

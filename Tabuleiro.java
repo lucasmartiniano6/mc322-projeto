@@ -10,10 +10,10 @@ public class Tabuleiro {
     private ArrayList<Peca> pretas = new ArrayList<>();
     private ArrayList<Pair> listaFensJogo = new ArrayList<>();
     private ArrayList<Peca> pecasComidas = new ArrayList<>();
-    private static JanelaChess  janela;
-    private static JanelaAssistir janela_a;
-    private Relogio relogio_brancas;
-    private Relogio relogio_pretas;
+    private static JanelaChess janela;
+    private static JanelaAssistir janelaExibir;
+    private Relogio relogioBrancas;
+    private Relogio relogioPretas;
     private String lastPlay = "preta";
     private String enPassantNow = null;
     private String enPassantNext = null;
@@ -67,152 +67,25 @@ public class Tabuleiro {
         adicionarTabuleiro(FEN.generateFen(this));
     }
 
-    public boolean setBoardFromFEN(String filename){
-        // Lê um arquivo FEN e coloca as peças no tabuleiro de acordo
-        FEN fen = new FEN();
-        
-        String data = fen.load("fen/lastFens/" +filename);
-        if(data == null) return false;
-        return fen._setBoard(data, this);
-    } 
-
-    public boolean saveBoard(String filename){
-        FEN fen = new FEN();
-        return fen.save(filename, this);
-    }
-
-    public void fischerInitializer(){
-        // Inicializa o tabuleiro com uma posição Fischer aleatória
-        // https://en.wikipedia.org/wiki/Fischer_random_chess
-        FEN fischer = new FEN();
-        String data = fischer.load("fen/fischer.fen");
-        String fens[] = data.split(" ");
-        // Seleciona uma posição aleatória entre as 960 posições possíveis
-        int random = (int)(Math.random() * 960);
-        System.out.println(random);
-        fischer._setBoard(fens[random], this);
-    }
-
-    private void adicionarTabuleiro(String fen) {
-        for(Pair par : listaFensJogo) {
-            if(par.getFen().equals(fen)) {
-                par.increaseTimes();
-                if(par.getTimes() == 3) {
-                    endGame("repetição"); //jogo acabou empatado (por repetição)
-                }
-                return;
-            }
-        }
-        listaFensJogo.add(new Pair(fen));
-    }
-
-   
-    public void playRelogio(String corJogador){
-        if(!relogio_brancas.getCorDono().equals(corJogador)){
-            relogio_brancas.despausaRelogio(relogio_brancas.getTimer());
-        } else{
-            if (!relogio_pretas.isStarted()){   
-                relogio_pretas.startRelogio();
-            }else{
-                relogio_pretas.despausaRelogio(relogio_pretas.getTimer());
-            }
-        }
-    }
-
-
-    public void pauseRelogio(String corJogador){
-        if(relogio_brancas.getCorDono().equals(corJogador)){
-            relogio_brancas.pausaRelogio(relogio_brancas.getTimer());
-        } else {
-            relogio_pretas.pausaRelogio(relogio_pretas.getTimer());
-        }
-    }
-    
-
-    public boolean mover(String origem, String destino){
-        // Movimenta a peça da origem para o destino
-        Peca peca = this.getPeca(origem);
-        if(peca == null) {
-            return false;   
-        }
-        if(peca.getCorDono().equals(getLastPlay())) {
-            return false;
-        }
-        // playRelogio(peca);
-        try {
-            boolean madeMove = peca.moverPeca(destino);
-            String fen = FEN.generateFen(this);
-            
-            // playRelogio(peca);
-            if(madeMove) {
-                saveBoard(fen);
-                adicionarTabuleiro(fen);
-                setLastPlay(peca.getCorDono());
-                pauseRelogio(peca.getCorDono());
-                playRelogio(peca.getCorDono());
-                
-            }
-            return madeMove;
-        } catch (NullPointerException e) {
-            System.out.println("Erro ao mover peça: " + e);
-            return false;
-        }
-    }
-
-    public void setEmpty(String posicao){
-        int x = Peca.getPosX(posicao);
-        int y = Peca.getPosY(posicao);
-        grid[x][y] = null;
-    }
-    
-    public void setEmpty(int x, int y){
-        grid[x][y] = null;
-    }
-
+    // Getters e Setters
     public ArrayList<Peca> getPecasComidas() {
         return pecasComidas;
     }
 
     public static JanelaAssistir getJanela_a() {
-        return janela_a;
+        return janelaExibir;
     }
 
-    public  void setJanela(JanelaAssistir janela_a) {
-        Tabuleiro.janela_a = janela_a;
+    public void setJanela(JanelaAssistir janelaExibir) {
+        Tabuleiro.janelaExibir = janelaExibir;
     }
 
-
-     public JanelaChess getJanela() {
+    public JanelaChess getJanela() {
         return janela;
     }
 
     public void setJanela(JanelaChess janela) {
         Tabuleiro.janela = janela;
-    }
-    
-    public boolean setPeca(String posicao, Peca peca){
-        // true se houve captura, false cc
-        boolean returnFlag = false;
-        int x = Peca.getPosX(posicao);
-        int y = Peca.getPosY(posicao);
-        setEmpty(peca.getPosicao());
-        if(this.grid[x][y] != null){
-            if(this.grid[x][y].getCorDono().equals("branca"))
-                brancas.remove(this.grid[x][y]);
-            else
-                pretas.remove(this.grid[x][y]);
-            pecasComidas.add(grid[x][y]);
-            returnFlag = true;
-        }
-        this.grid[x][y] = peca;
-        peca.setPosicao(posicao);
-        return returnFlag;
-    }
-
-    public Peca getPeca(String posicao){
-        int x = Peca.getPosX(posicao);
-        int y = Peca.getPosY(posicao);
-        return grid[x][y];
     }
 
     public Peca getPeca(int x, int y){
@@ -259,6 +132,23 @@ public class Tabuleiro {
         return lastPlay;
     }
 
+    public Relogio getRelogio_brancas() {
+        return relogioBrancas;
+    }
+
+
+    public void setRelogio_brancas(Relogio relogioBrancas) {
+        this.relogioBrancas = relogioBrancas;
+    }
+
+    public Relogio getRelogio_pretas() {
+        return relogioPretas;
+    }
+
+    public void setRelogio_pretas(Relogio relogioPretas) {
+        this.relogioPretas = relogioPretas;
+    }
+
     public ArrayList<Peca> getBrancas() {
         return brancas;
     }
@@ -286,6 +176,141 @@ public class Tabuleiro {
             return;
         this.pretas.add(peca);
     }
+
+
+    public void setEmpty(String posicao){
+        int x = Peca.getPosX(posicao);
+        int y = Peca.getPosY(posicao);
+        grid[x][y] = null;
+    }
+    
+    
+    public void setEmpty(int x, int y){
+        grid[x][y] = null;
+    }
+
+
+    public boolean setPeca(String posicao, Peca peca){
+        // true se houve captura, false cc
+        boolean returnFlag = false;
+        int x = Peca.getPosX(posicao);
+        int y = Peca.getPosY(posicao);
+        setEmpty(peca.getPosicao());
+        if(this.grid[x][y] != null){
+            if(this.grid[x][y].getCorDono().equals("branca"))
+                brancas.remove(this.grid[x][y]);
+            else
+                pretas.remove(this.grid[x][y]);
+            pecasComidas.add(grid[x][y]);
+            returnFlag = true;
+        }
+        this.grid[x][y] = peca;
+        peca.setPosicao(posicao);
+        return returnFlag;
+    }
+
+
+    public Peca getPeca(String posicao){
+        int x = Peca.getPosX(posicao);
+        int y = Peca.getPosY(posicao);
+        return grid[x][y];
+    }
+
+
+    public boolean setBoardFromFEN(String filename){
+        // Lê um arquivo FEN e coloca as peças no tabuleiro de acordo
+        FEN fen = new FEN();
+        
+        String data = fen.load("fen/lastFens/" +filename);
+        if(data == null) return false;
+        return fen.setBoard(data, this);
+    } 
+
+    public boolean saveBoard(String filename){
+        FEN fen = new FEN();
+        return fen.save(filename, this);
+    }
+
+
+    public void fischerInitializer(){
+        // Inicializa o tabuleiro com uma posição Fischer aleatória
+        // https://en.wikipedia.org/wiki/Fischer_random_chess
+        FEN fischer = new FEN();
+        String data = fischer.load("fen/fischer.fen");
+        String fens[] = data.split(" ");
+        // Seleciona uma posição aleatória entre as 960 posições possíveis
+        int random = (int)(Math.random() * 960);
+        System.out.println(random);
+        fischer.setBoard(fens[random], this);
+    }
+
+
+    private void adicionarTabuleiro(String fen) {
+        for(Pair par : listaFensJogo) {
+            if(par.getFen().equals(fen)) {
+                par.increaseTimes();
+                if(par.getTimes() == 3) {
+                    endGame("repetição"); //jogo acabou empatado (por repetição)
+                }
+                return;
+            }
+        }
+        listaFensJogo.add(new Pair(fen));
+    }
+
+   
+    public void playRelogio(String corJogador){
+        if(!relogioBrancas.getCorDono().equals(corJogador)){
+            relogioBrancas.despausaRelogio(relogioBrancas.getTimer());
+        } else{
+            if (!relogioPretas.isStarted()){   
+                relogioPretas.startRelogio();
+            }else{
+                relogioPretas.despausaRelogio(relogioPretas.getTimer());
+            }
+        }
+    }
+
+
+    public void pauseRelogio(String corJogador){
+        if(relogioBrancas.getCorDono().equals(corJogador)){
+            relogioBrancas.pausaRelogio(relogioBrancas.getTimer());
+        } else {
+            relogioPretas.pausaRelogio(relogioPretas.getTimer());
+        }
+    }
+    
+
+    public boolean mover(String origem, String destino){
+        // Movimenta a peça da origem para o destino
+        Peca peca = this.getPeca(origem);
+        if(peca == null) {
+            return false;   
+        }
+        if(peca.getCorDono().equals(getLastPlay())) {
+            return false;
+        }
+        // playRelogio(peca);
+        try {
+            boolean madeMove = peca.moverPeca(destino);
+            String fen = FEN.generateFen(this);
+            
+            // playRelogio(peca);
+            if(madeMove) {
+                saveBoard(fen);
+                adicionarTabuleiro(fen);
+                setLastPlay(peca.getCorDono());
+                pauseRelogio(peca.getCorDono());
+                playRelogio(peca.getCorDono());
+                
+            }
+            return madeMove;
+        } catch (NullPointerException e) {
+            System.out.println("Erro ao mover peça: " + e);
+            return false;
+        }
+    }
+    
 
     public boolean isChecked(String corDono){
         String reiPos = null;
@@ -318,6 +343,7 @@ public class Tabuleiro {
         return false;
     }
 
+
     public boolean noMoves(String corDono){
         ArrayList<Peca> pecas = corDono.equals("branca") ? getBrancas() : getPretas(); 
         ArrayList<Peca> pecasCopy = new ArrayList<Peca>(pecas);
@@ -334,6 +360,7 @@ public class Tabuleiro {
         return true;
     }
 
+
     public static void endGame(String motivo, String corGanhador) {
         System.out.println(corGanhador + "s vencem!");
         System.out.println("Motivo: " + motivo);
@@ -342,28 +369,10 @@ public class Tabuleiro {
         
     }
 
+
     public void endGame(String motivo) {
         System.out.println("Empate!");
         System.out.println("Motivo: " + motivo);
         janela.close(motivo);
-    }
-
-    public Relogio getRelogio_brancas() {
-        return relogio_brancas;
-    }
-
-
-    public void setRelogio_brancas(Relogio relogio_brancas) {
-        this.relogio_brancas = relogio_brancas;
-    }
-
-
-    public Relogio getRelogio_pretas() {
-        return relogio_pretas;
-    }
-
-
-    public void setRelogio_pretas(Relogio relogio_pretas) {
-        this.relogio_pretas = relogio_pretas;
     }
 }

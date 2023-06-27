@@ -17,7 +17,6 @@ public abstract class Window {
      
     public  abstract void gerarJanela();
 
-    
     public void setWindow(JFrame window) {
         this.window = window;
     }
