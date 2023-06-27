@@ -39,7 +39,7 @@ public class MenuPrincipal extends Window  {
         JButton watch_button = new JButton();
         play_button.setText("JOGAR");
         end_button.setText("SAIR");
-        watch_button.setText("ASSISTIR JOGO ANTERIOR");
+        watch_button.setText("ASSISTIR JOGO");
         play_button.setBounds( (int) ((getResolucao().getWidth()/2) -100), (int) getResolucao().getHeight()/2 - 100, 200, 50);
         watch_button.setBounds( (int) ((getResolucao().getWidth()/2) -100), (int) getResolucao().getHeight()/2 - 30, 200, 50);
         end_button.setBounds((int) ((getResolucao().getWidth()/2) -100), (int) getResolucao().getHeight()/2 + 40, 200, 50);
