@@ -1,9 +1,4 @@
-# Xadrez
-Projeto final de **MC322** - 1°semestre/2023
-* Lucas Martiniano - 231036
-* Daniel da Cruz - 260398
-* Guilherme Ferreira - 260469
-* Kairé Pereira - 260558
+Projeto MC322
 
 ![chessboard](imgs/screenshot.png)
 
