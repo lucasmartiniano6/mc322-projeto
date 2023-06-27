@@ -80,10 +80,11 @@ public abstract class Peca{
         String corDono = this.getCorDono();
         boolean comeu = false;
         String corAdversario = corDono.equals("branca") ? "preta" : "branca";
+
         if(this.isReachable(destino, false)) {
             getTabuleiro().setEnPassantNow(getTabuleiro().getEnPassantNext());
             getTabuleiro().setEnPassantNext(null);
-            comeu = _make_move(destino);
+            comeu = _makeMove(destino);
             if(!getTabuleiro().isChecked(corDono)) {
                 if(!comeu && !(peca instanceof Peao)) {
                     getTabuleiro().setColdMoves(getTabuleiro().getColdMoves() + 1);
@@ -146,7 +147,7 @@ public abstract class Peca{
         boolean comeu = false;
         String lastPos = this.getPosicao();
         if(this.isReachable(destino, true)) {
-           comeu = _make_move(destino);
+           comeu = _makeMove(destino);
             if(!this.getTabuleiro().isChecked(this.getCorDono())) {
                 undoMove(lastPos, destino, comeu);
                 return true;
@@ -157,7 +158,7 @@ public abstract class Peca{
     }
 
 
-    private boolean _make_move(String destino){
+    private boolean _makeMove(String destino){
         // Internamente chamado por moverPeca quando o movimento é válido
         // Coloca a peça em destino
         peca.setMovimentos(++movimentos);
