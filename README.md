@@ -5,7 +5,7 @@ Projeto MC322
 Implementation
 -----
 Diagrama UML:
-![diagrama](imgs/diagrama_ok.png)
+![diagrama](imgs/diagrama.png)
 
 Usage
 -----
