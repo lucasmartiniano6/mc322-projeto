@@ -7,6 +7,10 @@ Implementation
 Diagrama UML:
 ![diagrama](imgs/diagrama.png)
 
+Vídeo do Projeto:
+https://drive.google.com/file/d/1svUL9K7DqLj2aeXQlk_bTihVFPm1dH1j/view?usp=sharing
+-> obs: o diagrama mostrado no vídeo ainda está sem as setas de associação, sendo a versão acima a mais recente.
+
 Usage
 -----
 ```java
