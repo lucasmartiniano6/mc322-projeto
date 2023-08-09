@@ -1,15 +1,11 @@
-Projeto MC322
+# Projeto MC322
 
 ![chessboard](imgs/screenshot.png)
 
-Implementation
+Implementação
 -----
 Diagrama UML:
 ![diagrama](imgs/diagrama.png)
-
-Vídeo do Projeto:
-https://drive.google.com/file/d/1svUL9K7DqLj2aeXQlk_bTihVFPm1dH1j/view?usp=sharing
--> obs: o diagrama mostrado no vídeo ainda está sem as setas de associação, sendo a versão acima a mais recente.
 
 Resumo
 -----
@@ -33,7 +29,8 @@ Tendo validado o movimento, o próximo passo do método moverPeca é verificar s
 * **Em prática**
 -----
 Assim que executar o código do projeto, o usuário irá se deparar com a tela do menu principal, na qual há 3 opções: jogar, assistir jogo e sair. Clicando em “jogar”, os jogadores podem escolher uma entre três opções de tempo: 3, 5 ou 10 minutos. Após escolher o selecionar o tempo, a interface gráfica irá exibir o tabuleiro com as peças em suas devidas posições iniciais. Agora, basta que cada jogador execute lances alternados com seu adversário, começando pelas peças brancas. Para mover uma peça, basta que o usuário clique primeiro sobre a peça que deseja movimentar, e então clique na casa para a qual ele deseja levá-la. Caso isso não altere o tabuleiro, trata-se de um movimento inválido para aquela situação do jogo.
-```
+
+-----
 Extra refs
 -----
   * https://en.wikipedia.org/wiki/Chess_piece
